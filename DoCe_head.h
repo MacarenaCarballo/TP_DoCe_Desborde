@@ -4,6 +4,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include "pila_head.h"
+#include <time.h>
+#include <string.h>
 
 #define MAS_UNO 1
 #define MAS_DOS 2
@@ -13,5 +16,10 @@
 #define ESPEJO 4
 #define GANO_MAQUINA 5
 #define GANO_HUMANO 6
+#define REALIZADO 0
 
+int generarMazo(tPila *mazo);
+int modoFACIL(int vecCartas[]);
+int decoficarCarta(int carta);
+int jugar(char nombre[], int dificultad);
 #endif // DOCE_HEAD_H_INCLUDED

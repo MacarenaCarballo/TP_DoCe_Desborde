@@ -3,6 +3,8 @@
 
 int main()
 {
+    char nombre[20];
+    int dificultad;
     char opcion;
     do
     {
@@ -19,8 +21,27 @@ int main()
         {
 
         case 'A':
-
+            printf("\nIniciando juego...\n");
+            printf("Ingrese el nombre del jugador: ");
+            scanf("%s", nombre);
+            fflush(stdin);
+            printf("\nBienvenido %s\n", nombre);
+            do
+            {
+                printf("Seleccione dificultad:\n"
+                    "[1] Facil\n"
+                    "[2] Medio\n"
+                    "[3] Dificil\n"
+                    "\nIngrese una opcion: ");
+             
+             scanf("%d", &dificultad);
+            } while (dificultad < 1 || dificultad > 3);
+            system("cls");
+            jugar(nombre, dificultad);
+            printf("\n\nFin del juego.\n");
+            system("cls");  
             break;
+            
         case 'B':
 
             break;
