@@ -22,4 +22,5 @@ int generarMazo(tPila *mazo);
 int modoFACIL(int vecCartas[]);
 int decoficarCarta(int carta);
 int jugar(char nombre[], int dificultad);
+
 #endif // DOCE_HEAD_H_INCLUDED

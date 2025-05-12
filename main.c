@@ -33,15 +33,15 @@ int main()
                     "[2] Medio\n"
                     "[3] Dificil\n"
                     "\nIngrese una opcion: ");
-             
+
              scanf("%d", &dificultad);
             } while (dificultad < 1 || dificultad > 3);
             system("cls");
-            jugar(nombre, dificultad);
+            // Se inicializa el juego
             printf("\n\nFin del juego.\n");
-            system("cls");  
+            system("cls");
             break;
-            
+
         case 'B':
 
             break;
