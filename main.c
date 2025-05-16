@@ -1,5 +1,6 @@
 #include "DoCe_head.h"
 #include "pila_head.h"
+#include "cola_head.h"
 
 int main()
 {
