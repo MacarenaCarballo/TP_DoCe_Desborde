@@ -34,8 +34,11 @@ typedef struct
 
 int generarMazo(tPila *mazo);
 int modoFACIL(int vecCartas[]);
-int decoficarCarta(int carta);
+const char* decodificarCarta(int valor);
 int jugar(char nombre[], int dificultad);
 int generarInforme(tCola *informe, int ganador, char *nombreJugador);
+void leerConfiguracion(char* url, char* codigo);
+void enviarResultadoAPI(const char* urlBase, const char* codigoGrupo, const char* nombre, int gano);
+void obtenerRanking(const char* codigoGrupo);
 
 #endif // DOCE_HEAD_H_INCLUDED

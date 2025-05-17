@@ -59,5 +59,32 @@ int main()
     }
     while(opcion != 'C');
 
+//    tInforme jugadas[10];
+//    tCola informe;
+//    crearCola(&informe);
+//    int cartasMaquina[10] = {1, -1, 3, 2, 4, -2, 1, -1, 3, 2};
+//    int cartasJugador[10] = {2, 3, -1, 1, -2, 4, 3, -2, 1, 4};
+//
+//    for (int i = 0; i < 10; i++)
+//    {
+//        jugadas[i].numTurno = i + 1;
+//        strncpy(jugadas[i].cartaMaquina, decodificarCarta(cartasMaquina[i]), TAM_NOMBRES);
+//        strncpy(jugadas[i].cartaJugador, decodificarCarta(cartasJugador[i]), TAM_NOMBRES);
+//        jugadas[i].puntosJugador = (i + 1) * 2;   // ejemplo de puntaje
+//        jugadas[i].puntosMaquina = (i + 1) * 3;   // ejemplo de puntaje
+//    }
+//
+//    // Mostrar las jugadas
+//    for (int i = 0; i < 10; i++)
+//    {
+//        printf("Turno %d:\n", jugadas[i].numTurno);
+//        printf("  Maquina: %s, Puntos: %d\n", jugadas[i].cartaMaquina, jugadas[i].puntosMaquina);
+//        printf("  Jugador: %s, Puntos: %d\n", jugadas[i].cartaJugador, jugadas[i].puntosJugador);
+//        ponerEnCola(&informe,&jugadas[i],sizeof(tInforme));
+//    }
+//    generarInforme(&informe,5,"RAMIRO");
+//    vaciarCola(&informe);
+
+
     return 0;
 }

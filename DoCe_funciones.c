@@ -41,42 +41,18 @@ int modoFACIL( int vecCartas[])
     return vecCartas[numero];
 }
 
-int decoficarCarta(int carta)
+const char* decodificarCarta(int valor)
 {
-    switch (carta)
+    switch (valor)
     {
-        case MAS_UNO:
-        {
-            printf("Suma 1\n");
-            return 1;
-        }
-        case MAS_DOS:
-        {
-            printf("Suma 2\n");
-            return 2;
-        }
-        case SACAR_UNO:
-        {
-            printf("Saca 1\n");
-            return -1;
-        }
-        case SACAR_DOS:
-        {
-            printf("Saca 2\n");
-            return -2;
-        }
-        case REPETIR_TURNO:
-        {
-            printf("Repite turno\n");
-            return 3;
-        }
-        case ESPEJO:
-        {
-            printf("Espejo\n");
-            return 4;
-        }
+        case MAS_UNO: return "MAS_UNO";
+        case MAS_DOS: return "MAS_DOS";
+        case SACAR_UNO: return "SACAR_UNO";
+        case SACAR_DOS: return "SACAR_DOS";
+        case REPETIR_TURNO: return "REPETIR_TURNO";
+        case ESPEJO: return "ESPEJO";
+        default: return "CARTA_DESCONOCIDA";
     }
-    return 0;
 }
 
 int generarInforme(tCola *informe, int ganador, char *nombreJugador)
@@ -108,11 +84,12 @@ int generarInforme(tCola *informe, int ganador, char *nombreJugador)
     while(colaVacia(informe)!=COLA_VACIA)
     {
         sacarDeCola(informe,&jugada,sizeof(tInforme));
-        fprintf(pInforme,"NUMERO DE TURNO:%d",jugada.numTurno);
+        fprintf(pInforme,"NUMERO DE TURNO:%d\n",jugada.numTurno);
         fprintf(pInforme,"Carta Jugada por %s: %s\n",nombreJugador,jugada.cartaJugador);
         fprintf(pInforme,"Carta Jugada por %s: %s\n",maq,jugada.cartaMaquina);
         fprintf(pInforme,"Puntos Acumulados por %s: %d\n",nombreJugador,jugada.puntosJugador);
-        fprintf(pInforme,"Puntos Acumulados por %s: %d\n",maq,jugada.puntosMaquina);
+        fprintf(pInforme,"Puntos Acumulados por %s: %d\n\n",maq,jugada.puntosMaquina);
+
 
     }
     fprintf(pInforme,"EL GANADOR DEL JUEGO ES: %s\n", ganador==5? nombreJugador: "MAQUINA");
@@ -121,3 +98,4 @@ int generarInforme(tCola *informe, int ganador, char *nombreJugador)
     return REALIZADO;
 
 }
+
