@@ -99,3 +99,145 @@ int generarInforme(tCola *informe, int ganador, char *nombreJugador)
 
 }
 
+int leerConfiguracion(tApi* configuracion)
+{
+    FILE *pf=fopen("configuracionesApi.txt", "r+t");
+    char linea[100];
+    char *act;
+    if(!pf)
+    {
+        printf("ERROR AL ABRIR EL ARCHIVO\n");
+        return -1;
+
+    }
+    fgets(linea,100,pf);
+    fclose(pf);
+
+    act = strchr(linea, '\n');
+    if (act)
+        *act = '\0';
+
+    act=strrchr(linea,'|');
+    strcpy(configuracion->codGrupo,act+1);
+    *act='\0';
+    strcpy(configuracion->urlAPi,linea);
+
+    return 0;
+}
+
+int  enviarResultadoAPI(tApi* config, const char* nombre, int gano)
+{
+    CURL* curl;
+    CURLcode res;
+    char json[256];
+
+    //JSON PARA LA API
+    sprintf(json,
+        "{\"codigoGrupo\":\"%s\",\"jugador\":{\"nombre\":\"%s\",\"vencedor\":%d}}",
+        config->codGrupo, nombre, gano
+    );
+
+
+    curl_global_init(CURL_GLOBAL_ALL);
+    curl = curl_easy_init();
+
+    if (curl) {
+
+        curl_easy_setopt(curl, CURLOPT_URL, config->urlAPi);
+        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, json);
+
+
+        struct curl_slist* headers = NULL;
+        headers = curl_slist_append(headers, "Content-Type: application/json");
+        curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+
+
+        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+
+        // SOLICITUD DE POST
+        res = curl_easy_perform(curl);
+
+        //VERIFICO ERROR
+        if (res != CURLE_OK) {
+            fprintf(stderr, "Error al enviar POST: %s\n", curl_easy_strerror(res));
+        }
+
+
+        curl_slist_free_all(headers);
+        curl_easy_cleanup(curl);
+    }
+
+    curl_global_cleanup();
+
+    return 0;
+}
+
+int obtenerRanking(tApi *config)
+{
+    CURL *curl;
+    CURLcode res;
+    char urlCompleto[256];
+    sprintf(urlCompleto, "%s/%s",config->urlAPi,config->codGrupo);
+    printf("%s\n",urlCompleto);
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+    curl = curl_easy_init();
+
+    if (curl) {
+        // CARGO EL URL DE GET
+        curl_easy_setopt(curl, CURLOPT_URL, urlCompleto);
+
+        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+
+        //MUESTRA LA RESPUESTA
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+
+        // SOLICITO GET
+        res = curl_easy_perform(curl);
+
+        if (res != CURLE_OK) {
+            fprintf(stderr, "Error en la solicitud: %s\n", curl_easy_strerror(res));
+        }
+        curl_easy_cleanup(curl);
+    }
+
+    curl_global_cleanup();
+
+    return 0;
+}
+
+size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp)
+{
+    size_t realsize = size * nmemb;
+    printf("%.*s", (int)realsize, (char *)contents);
+    return realsize;
+}
+
+void eliminarRanking(tApi* config)
+{
+    CURL* curl;
+    CURLcode res;
+    char urlCompleto[256];
+    sprintf(urlCompleto, "%s/%s",config->urlAPi,config->codGrupo);
+    printf("%s\n",urlCompleto);
+
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+    curl = curl_easy_init();
+
+    if (curl) {
+        curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "DELETE");
+        curl_easy_setopt(curl, CURLOPT_URL,urlCompleto);
+        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+        res = curl_easy_perform(curl);
+
+        if (res != CURLE_OK) {
+            fprintf(stderr, "Error al hacer DELETE: %s\n", curl_easy_strerror(res));
+        } else {
+            printf("Ranking del grupo '%s' eliminado correctamente.\n", config->codGrupo);
+        }
+
+        curl_easy_cleanup(curl);
+    }
+
+    curl_global_cleanup();
+}
+

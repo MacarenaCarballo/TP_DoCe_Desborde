@@ -2,6 +2,8 @@
 #include "pila_head.h"
 #include "cola_head.h"
 
+
+
 int main()
 {
     char nombre[20];
@@ -38,12 +40,22 @@ int main()
              scanf("%d", &dificultad);
             } while (dificultad < 1 || dificultad > 3);
             system("cls");
-            // Se inicializa el juego
+
             printf("\n\nFin del juego.\n");
             system("cls");
             break;
 
         case 'B':
+            tApi config;
+            if(!leerConfiguracion(&config))
+            {
+                printf("CODIGO DEL GRUPO: %s\n",config.codGrupo);
+                printf("URL DE LA API: %s\n",config.urlAPi);
+                }
+                else
+                    printf("ERROR AL LEER LA CONFIGURACIONES DE LA API\n");
+
+            obtenerRanking(&config);
 
             break;
         case 'C':
