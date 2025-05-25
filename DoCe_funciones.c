@@ -1,8 +1,8 @@
 #include "DoCe_head.h"
 
-int agregarCartas(tPila* p, int tipo, int cantidad) {
+int apilarCartas(tPila *p, int *cartas, int cantidad) {
     for (int i = 0; i < cantidad; i++) {
-        if (apilar(p, &tipo, sizeof(int)) != SATISFACTORIO)
+        if (apilar(p, &cartas[i], sizeof(int)) != SATISFACTORIO)
             return PILA_LLENA;
     }
     return SATISFACTORIO;

@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define TAM 100
+#define TAM 320 // Calculo de 40 cartas * ( 4 bytes del dato Int + 4 bytes del tamDelDato unsigned) = 320 bytes
 #define PILA_LLENA 1
 #define PILA_VACIA 2
 #define PILA_NO_VACIA 0

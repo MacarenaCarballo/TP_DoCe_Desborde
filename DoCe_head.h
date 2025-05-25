@@ -18,6 +18,6 @@
 
 
 int generarMazo(tPila *p);
-int agregarCartas(tPila* p, int tipo, int cantidad);
+int apilarCartas(tPila *p, int *cartas, int cantidad);
 
 #endif // DOCE_HEAD_H_INCLUDED
