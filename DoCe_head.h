@@ -1,6 +1,8 @@
 #ifndef DOCE_HEAD_H_INCLUDED
 #define DOCE_HEAD_H_INCLUDED
 
+#include "pila_head.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -48,5 +50,9 @@ int  enviarResultadoAPI(tApi* config, const char* nombre, int gano);
 int obtenerRanking(tApi *config);
 size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp);
 void eliminarRanking(tApi* config);
+
+
+int generarMazo(tPila *p);
+int apilarCartas(tPila *p, int *cartas, int cantidad);
 
 #endif // DOCE_HEAD_H_INCLUDED
