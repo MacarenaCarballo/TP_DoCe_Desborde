@@ -1,8 +1,13 @@
 #include "DoCe_head.h"
 #include "pila_head.h"
+#include "cola_head.h"
+
+
 
 int main()
 {
+    char nombre[20];
+    int dificultad;
     char opcion;
     do
     {
@@ -19,9 +24,38 @@ int main()
         {
 
         case 'A':
+            printf("\nIniciando juego...\n");
+            printf("Ingrese el nombre del jugador: ");
+            scanf("%s", nombre);
+            fflush(stdin);
+            printf("\nBienvenido %s\n", nombre);
+            do
+            {
+                printf("Seleccione dificultad:\n"
+                    "[1] Facil\n"
+                    "[2] Medio\n"
+                    "[3] Dificil\n"
+                    "\nIngrese una opcion: ");
 
+             scanf("%d", &dificultad);
+            } while (dificultad < 1 || dificultad > 3);
+            system("cls");
+
+            printf("\n\nFin del juego.\n");
+            system("cls");
             break;
+
         case 'B':
+            tApi config;
+            if(!leerConfiguracion(&config))
+            {
+                printf("CODIGO DEL GRUPO: %s\n",config.codGrupo);
+                printf("URL DE LA API: %s\n",config.urlAPi);
+                }
+                else
+                    printf("ERROR AL LEER LA CONFIGURACIONES DE LA API\n");
+
+            obtenerRanking(&config);
 
             break;
         case 'C':
@@ -36,6 +70,33 @@ int main()
 
     }
     while(opcion != 'C');
+
+//    tInforme jugadas[10];
+//    tCola informe;
+//    crearCola(&informe);
+//    int cartasMaquina[10] = {1, -1, 3, 2, 4, -2, 1, -1, 3, 2};
+//    int cartasJugador[10] = {2, 3, -1, 1, -2, 4, 3, -2, 1, 4};
+//
+//    for (int i = 0; i < 10; i++)
+//    {
+//        jugadas[i].numTurno = i + 1;
+//        strncpy(jugadas[i].cartaMaquina, decodificarCarta(cartasMaquina[i]), TAM_NOMBRES);
+//        strncpy(jugadas[i].cartaJugador, decodificarCarta(cartasJugador[i]), TAM_NOMBRES);
+//        jugadas[i].puntosJugador = (i + 1) * 2;   // ejemplo de puntaje
+//        jugadas[i].puntosMaquina = (i + 1) * 3;   // ejemplo de puntaje
+//    }
+//
+//    // Mostrar las jugadas
+//    for (int i = 0; i < 10; i++)
+//    {
+//        printf("Turno %d:\n", jugadas[i].numTurno);
+//        printf("  Maquina: %s, Puntos: %d\n", jugadas[i].cartaMaquina, jugadas[i].puntosMaquina);
+//        printf("  Jugador: %s, Puntos: %d\n", jugadas[i].cartaJugador, jugadas[i].puntosJugador);
+//        ponerEnCola(&informe,&jugadas[i],sizeof(tInforme));
+//    }
+//    generarInforme(&informe,5,"RAMIRO");
+//    vaciarCola(&informe);
+
 
     return 0;
 }
