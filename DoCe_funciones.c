@@ -2,6 +2,42 @@
 
 #define CANT_REPARTO 3
 
+void mostrarCarta(signed char carta, int indice) {
+    char *nombre;
+
+    switch (carta) {
+        case MAS_UNO:       nombre = "MAS UNO"; break;
+        case MAS_DOS:       nombre = "MAS DOS"; break;
+        case SACAR_UNO:     nombre = "SACAR 1"; break;
+        case SACAR_DOS:     nombre = "SACAR 2"; break;
+        case REPETIR_TURNO: nombre = "REPETIR"; break;
+        case ESPEJO:        nombre = "ESPEJO"; break;
+        default:            nombre = "???";     break;
+    }
+
+    printf(" Carta [%d]:\n", indice + 1);
+    printf("+---------+\n");
+    printf("|         |\n");
+    printf("|  %3d     |\n", carta);
+    printf("| %8s |\n", nombre);
+    printf("+---------+\n");
+}
+
+void mostrarTablero(unsigned char puntosHum, unsigned char puntosMaq, const tVectorCartas *cartasHum) {
+    puts("\n================================");
+    printf(" PUNTAJES -> Jugador: %2d | Maquina: %2d\n", puntosHum, puntosMaq);
+    puts("================================");
+    puts(" Tus cartas:\n");
+
+    for (int i = 0; i < cartasHum->cantElem; i++) {
+        signed char carta = (signed char)(cartasHum->datos[i]);
+        mostrarCarta(carta, i);
+        puts(""); // espacio entre cartas
+    }
+
+    puts("================================\n");
+}
+
 int repartirCartas(tPila *mazo, tVectorCartas *jugHum, tVectorCartas *jugMaq) {
     signed char carta,
                     i;
