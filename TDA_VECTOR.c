@@ -25,7 +25,7 @@ void mezclarVector(tVectorCartas *vec) {
 }
 
 // Extrae una carta del final del vector
-int vector_sacar(tVectorCartas *vec, signed char *carta) {
+int sacarUltVec(tVectorCartas *vec, signed char *carta) {
     if (vec->cantElem == 0)
         return VACIO;
 
@@ -40,4 +40,9 @@ int verCartaPorPos(const tVectorCartas *vec, unsigned pos, signed char *carta) {
 
     *carta = vec->datos[pos];
     return REALIZADO;
+}
+
+void vaciarVector(tVectorCartas *vec)
+{
+    vec->cantElem = 0;
 }

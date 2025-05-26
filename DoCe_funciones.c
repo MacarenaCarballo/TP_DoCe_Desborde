@@ -32,23 +32,29 @@ int jugar(char nombre[], int dificultad)
     vaciarPila(&mazoDescarte);
 }
 */
-int apilarVariasVeces(tPila *mazo, signed char carta, unsigned repeticiones)
-{
-    while (repeticiones--) {
-        if (apilar(mazo, &carta, sizeof(signed char)) != REALIZADO)
-            return SIN_MEM;
-    }
-    return REALIZADO;
-}
 
-int generarMazo(tPila *mazo)
+
+int generarMazo(tPila *pMazo)
 {
-    if (apilarVariasVeces(mazo, MAS_DOS, 6) != REALIZADO) return SIN_MEM;
-    if (apilarVariasVeces(mazo, MAS_UNO, 10) != REALIZADO) return SIN_MEM;
-    if (apilarVariasVeces(mazo, SACAR_UNO, 8) != REALIZADO) return SIN_MEM;
-    if (apilarVariasVeces(mazo, SACAR_DOS, 6) != REALIZADO) return SIN_MEM;
-    if (apilarVariasVeces(mazo, REPETIR_TURNO, 6) != REALIZADO) return SIN_MEM;
-    if (apilarVariasVeces(mazo, ESPEJO, 4) != REALIZADO) return SIN_MEM;
+    tVectorCartas vecMazo;
+    signed char carta;
+
+    crearVector(&vecMazo);
+
+    if (insVecAlFinal(vecMazo, MAS_DOS, 6) != REALIZADO) return SIN_MEM;
+    if (insVecAlFinal(vecMazo, MAS_UNO, 10) != REALIZADO) return SIN_MEM;
+    if (insVecAlFinal(vecMazo, SACAR_UNO, 8) != REALIZADO) return SIN_MEM;
+    if (insVecAlFinal(vecMazo, SACAR_DOS, 6) != REALIZADO) return SIN_MEM;
+    if (insVecAlFinal(vecMazo, REPETIR_TURNO, 6) != REALIZADO) return SIN_MEM;
+    if (insVecAlFinal(vecMazo, ESPEJO, 4) != REALIZADO) return SIN_MEM;
+
+    mezclarVector(&vecMazo);
+
+    while(sacarUltVec(&vecMazo,&carta)!= VACIO)
+        if(apilar(&pMazo,&carta,sizeof(signed char))!=REALIZADO)
+            return SIN_MEM;
+
+    vaciarVector(&vecMazo);
 
     return REALIZADO;
 }

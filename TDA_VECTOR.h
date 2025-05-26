@@ -15,5 +15,6 @@ int insVecAlFinal(tVectorCartas *vec, signed char carta);
 void mezclarVector(tVectorCartas *vec);
 int sacarUltVec(tVectorCartas *vec, signed char *carta);
 int verCartaPorPos(const tVectorCartas *vec, unsigned pos, signed char *carta);
+void vaciarVector(tVectorCartas *vec);
 
 #endif // TDA_VECTOR_H_INCLUDED
