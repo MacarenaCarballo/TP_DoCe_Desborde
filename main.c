@@ -1,7 +1,4 @@
-#include "DoCe_head.h"
-#include "pila_head.h"
-#include "cola_head.h"
-
+#include "comun.h"
 
 
 int main()
@@ -47,7 +44,7 @@ int main()
 
         case 'B':
             tApi config;
-            if(!leerConfiguracion(&config))
+            if(leerConfiguracion(&config)!= REALIZADO)
             {
                 printf("CODIGO DEL GRUPO: %s\n",config.codGrupo);
                 printf("URL DE LA API: %s\n",config.urlAPi);

@@ -1,28 +1,23 @@
 #ifndef DOCE_HEAD_H_INCLUDED
 #define DOCE_HEAD_H_INCLUDED
 
-#include "pila_head.h"
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <ctype.h>
-#include "pila_head.h"
-#include <time.h>
-#include <string.h>
 #include <curl/curl.h>
-#include "cola_head.h"
 
+#include "comun.h"
 
-#define MAS_UNO 1
-#define MAS_DOS 2
-#define SACAR_UNO -1
-#define SACAR_DOS -2
+#define ERROR_ARCH   -5
+
+#define SACAR_DOS    -2
+#define SACAR_UNO    -1
+#define MAS_UNO       1
+#define MAS_DOS       2
 #define REPETIR_TURNO 3
-#define ESPEJO 4
-#define GANO_MAQUINA 5
-#define GANO_HUMANO 6
-#define REALIZADO 0
-#define TAM_NOMBRES 15
+#define ESPEJO        4
+
+#define GANO_MAQUINA  5
+#define GANO_HUMANO   6
+
+#define TAM_NOMBRES   15
 
 
 typedef struct

@@ -1,18 +1,7 @@
 #ifndef COLA_HEAD_H_INCLUDED
 #define COLA_HEAD_H_INCLUDED
 
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "pila_head.h"
-
-#define SIN_MEM -1
-#define COLA_LLENA 1
-#define COLA_VACIA 2
-#define COLA_NO_VACIA 3
-#define COLA_DISPONIBLE 4
-#define REALIZADO 0
+#include "comun.h"
 
 typedef struct sNodo{
 void *dato;

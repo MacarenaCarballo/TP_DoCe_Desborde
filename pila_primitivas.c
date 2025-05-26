@@ -1,4 +1,4 @@
-#include "pila_head.h"
+#include "comun.h"
 
 void crearPila(tPila* pila)
 {
@@ -8,47 +8,44 @@ void crearPila(tPila* pila)
 int apilar(tPila *pila,const void *dato, unsigned tam)
 {
     if(pila->tope < tam + sizeof(unsigned))
-    {
-        return PILA_LLENA;
-    }
+        return SIN_MEM;
+
     pila->tope-=tam;
     memcpy( pila->pila+pila->tope,dato,tam);
     pila->tope-= sizeof(tam);
     memcpy(pila->pila+pila->tope,&tam,sizeof(tam));
 
-    return SATISFACTORIO;
+    return REALIZADO;
 
 }
 
 int pilaLlena(const tPila *pila, unsigned tam)
 {
     if(pila->tope < tam + sizeof(unsigned))
-    {
-        return PILA_LLENA;
-    }
-    return PILA_DISPONIBLE;
+        return SIN_MEM;
+
+    return REALIZADO;
 }
 
 int pilaVacia(const tPila *pila)
 {
     if(pila->tope==TAM)
-    {
-        return PILA_VACIA;
-    }
-    return PILA_NO_VACIA;
+        return VACIO;
+
+    return REALIZADO;
 }
 
 int verTope(const tPila *pila, void *dato, unsigned tam)
 {
     unsigned tamInfo;
     if(pila->tope==TAM)
-    {
-        return PILA_VACIA;
-    }
+        return VACIO;
+
 
     memcpy(&tamInfo,pila->pila+pila->tope,sizeof(unsigned));
     memcpy(dato,pila->pila+pila->tope+sizeof(unsigned), MINIMO(tam,tamInfo));
-    return SATISFACTORIO;
+
+    return REALIZADO;
 }
 
 void vaciarPila(tPila *pila)
@@ -59,13 +56,14 @@ void vaciarPila(tPila *pila)
 int desapilar(tPila *pila, void * dato, unsigned tam)
 {
     unsigned tamInfo;
+
     if(pila->tope==TAM)
-    {
-        return PILA_VACIA;
-    }
+        return VACIO;
+
     memcpy(&tamInfo,pila->pila+pila->tope,sizeof(unsigned));
     pila->tope+=sizeof(unsigned);
     memcpy(dato,pila->pila+pila->tope,MINIMO(tam,tamInfo));
     pila->tope+=tamInfo;
-    return SATISFACTORIO;
+
+    return REALIZADO;
 }

@@ -38,7 +38,7 @@ int sacarDeCola(tCola *cola,void* dato,unsigned tam)
 {
     tNodo *elim;
     if(cola->pri==NULL)
-        return COLA_VACIA;
+        return VACIO;
 
     elim=cola->pri;
     memcpy(dato,elim->dato,MINIMO(elim->tam,tam));
@@ -56,7 +56,8 @@ int sacarDeCola(tCola *cola,void* dato,unsigned tam)
 int verPrimero(const tCola *cola,void* dato,unsigned tam)
 {
     if(cola->pri==NULL)
-        return COLA_VACIA;
+        return VACIO;
+
     memcpy(dato,cola->pri->dato,MINIMO(tam,cola->pri->tam));
 
     return REALIZADO;
@@ -64,14 +65,12 @@ int verPrimero(const tCola *cola,void* dato,unsigned tam)
 
 int colaLlena(const tCola *cola, unsigned tam)
 {
-    return COLA_DISPONIBLE;
+    return REALIZADO;
 }
 
 int colaVacia(const tCola *cola)
 {
-    if(cola->pri==NULL)
-        return COLA_VACIA;
-    return COLA_NO_VACIA;
+    return cola->pri == NULL ? VACIO : REALIZADO;
 }
 
 void vaciarCola(tCola *cola)

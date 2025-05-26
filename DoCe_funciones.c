@@ -1,34 +1,54 @@
-#include "DoCe_head.h"
-#include "pila_head.h"
-#include "cola_head.h"
+#include "comun.h"
+/*
+int jugar(char nombre[], int dificultad)
+{
+    tPila mazoJuego,
+          mazoDescarte;
 
+    tCola informeJuego;
+
+    unsigned char nroDeTurno = 1,
+                  puntajeHum = 0,
+                  puntajeMaq = 0;
+
+    crearPila(&mazoJuego);
+    crearPila(&mazoDescarte);
+    crearCola(&informeJuego);
+
+    if(generarMazo(&mazoJuego)!= REALIZADO){
+        puts("No se pudo generar el mazo de juego");
+        return PILA_LLENA;
+    }
+
+    repartirCartas()
+
+    while( puntajeHum < 12 && puntajeMaq < 12)
+    {
+
+    }
+
+    vaciarCola(&informeJuego);
+    vaciarPila(&mazoJuego);
+    vaciarPila(&mazoDescarte);
+}
+*/
+int apilarVariasVeces(tPila *mazo, signed char carta, unsigned repeticiones)
+{
+    while (repeticiones--) {
+        if (apilar(mazo, &carta, sizeof(signed char)) != REALIZADO)
+            return SIN_MEM;
+    }
+    return REALIZADO;
+}
 
 int generarMazo(tPila *mazo)
 {
-    int i,num;
-    num=MAS_DOS;
-    for (i = 0; i < 6; i++)
-        apilar(mazo,&num,sizeof(int));
-
-    num=MAS_UNO;
-    for (i = 0; i < 10; i++)
-        apilar(mazo,&num,sizeof(int));
-
-    num=SACAR_UNO;
-    for (i = 0; i < 8; i++)
-        apilar(mazo,&num,sizeof(int));
-
-    num=SACAR_DOS;
-    for (i = 0; i < 6; i++)
-        apilar(mazo,&num,sizeof(int));
-
-    num=REPETIR_TURNO;
-    for (i = 0; i < 6; i++)
-        apilar(mazo,&num,sizeof(int));
-
-    num=ESPEJO;
-    for (i = 0; i < 4; i++)
-        apilar(mazo,&num,sizeof(int));
+    if (apilarVariasVeces(mazo, MAS_DOS, 6) != REALIZADO) return SIN_MEM;
+    if (apilarVariasVeces(mazo, MAS_UNO, 10) != REALIZADO) return SIN_MEM;
+    if (apilarVariasVeces(mazo, SACAR_UNO, 8) != REALIZADO) return SIN_MEM;
+    if (apilarVariasVeces(mazo, SACAR_DOS, 6) != REALIZADO) return SIN_MEM;
+    if (apilarVariasVeces(mazo, REPETIR_TURNO, 6) != REALIZADO) return SIN_MEM;
+    if (apilarVariasVeces(mazo, ESPEJO, 4) != REALIZADO) return SIN_MEM;
 
     return REALIZADO;
 }
@@ -97,7 +117,6 @@ int generarInforme(tCola *informe, int ganador, char *nombreJugador)
 
     fclose(pInforme);
     return REALIZADO;
-
 }
 
 int leerConfiguracion(tApi* configuracion)
@@ -105,12 +124,11 @@ int leerConfiguracion(tApi* configuracion)
     FILE *pf=fopen("configuracionesApi.txt", "r+t");
     char linea[100];
     char *act;
-    if(!pf)
-    {
+    if(!pf){
         printf("ERROR AL ABRIR EL ARCHIVO\n");
-        return -1;
-
+        return ERROR_ARCH;
     }
+
     fgets(linea,100,pf);
     fclose(pf);
 
@@ -123,7 +141,7 @@ int leerConfiguracion(tApi* configuracion)
     *act='\0';
     strcpy(configuracion->urlAPi,linea);
 
-    return 0;
+    return REALIZADO;
 }
 
 int  enviarResultadoAPI(tApi* config, const char* nombre, int gano)
@@ -170,7 +188,7 @@ int  enviarResultadoAPI(tApi* config, const char* nombre, int gano)
 
     curl_global_cleanup();
 
-    return 0;
+    return REALIZADO;
 }
 
 int obtenerRanking(tApi *config)
@@ -203,7 +221,7 @@ int obtenerRanking(tApi *config)
 
     curl_global_cleanup();
 
-    return 0;
+    return REALIZADO;
 }
 
 size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp)
