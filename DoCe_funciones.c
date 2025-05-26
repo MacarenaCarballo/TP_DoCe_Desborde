@@ -2,40 +2,72 @@
 
 #define CANT_REPARTO 3
 
-void mostrarCarta(signed char carta, int indice) {
-    char *nombre;
+void mostrarCartasEnLinea(const tVectorCartas *cartas) {
+    const char *nombres[] = {
+        "SACAR 2",  // -2
+        "SACAR 1",  // -1
+        "MAS UNO",  //  1
+        "MAS DOS",  //  2
+        "REPETIR",  //  3
+        "ESPEJO "   //  4
+    };
 
-    switch (carta) {
-        case MAS_UNO:       nombre = "MAS UNO"; break;
-        case MAS_DOS:       nombre = "MAS DOS"; break;
-        case SACAR_UNO:     nombre = "SACAR 1"; break;
-        case SACAR_DOS:     nombre = "SACAR 2"; break;
-        case REPETIR_TURNO: nombre = "REPETIR"; break;
-        case ESPEJO:        nombre = "ESPEJO"; break;
-        default:            nombre = "???";     break;
+    int i;
+    int cant = cartas->cantElem;
+    signed char carta;
+
+    // Línea superior
+    for (i = 0; i < cant; i++) printf("+---------+   ");
+    printf("\n");
+
+    // Línea vacía
+    for (i = 0; i < cant; i++) printf("|         |   ");
+    printf("\n");
+
+    // Línea con valor numérico
+    for (i = 0; i < cant; i++) {
+        carta = (signed char)(cartas->datos[i]);
+        printf("|  %3d     |   ", carta);
     }
+    printf("\n");
 
-    printf(" Carta [%d]:\n", indice + 1);
-    printf("+---------+\n");
-    printf("|         |\n");
-    printf("|  %3d     |\n", carta);
-    printf("| %8s |\n", nombre);
-    printf("+---------+\n");
+    // Línea con nombre de la carta
+    for (i = 0; i < cant; i++) {
+        carta = (signed char)(cartas->datos[i]);
+
+        const char *nombre;
+        switch (carta) {
+            case -2: nombre = nombres[0]; break;
+            case -1: nombre = nombres[1]; break;
+            case  1: nombre = nombres[2]; break;
+            case  2: nombre = nombres[3]; break;
+            case  3: nombre = nombres[4]; break;
+            case  4: nombre = nombres[5]; break;
+            default: nombre = "???????"; break;
+        }
+
+        printf("| %-8s|   ", nombre);
+    }
+    printf("\n");
+
+    // Línea inferior
+    for (i = 0; i < cant; i++) printf("+---------+   ");
+    printf("\n");
+
+    // Índices debajo
+    for (i = 0; i < cant; i++) printf("   [%d]       ", i + 1);
+    printf("\n");
 }
 
 void mostrarTablero(unsigned char puntosHum, unsigned char puntosMaq, const tVectorCartas *cartasHum) {
-    puts("\n================================");
-    printf(" PUNTAJES -> Jugador: %2d | Maquina: %2d\n", puntosHum, puntosMaq);
-    puts("================================");
+    puts("\n=========================================");
+    printf(" PUNTAJES -> Humano: %2d | Maquina: %2d\n", puntosHum, puntosMaq);
+    puts("=========================================");
     puts(" Tus cartas:\n");
 
-    for (int i = 0; i < cartasHum->cantElem; i++) {
-        signed char carta = (signed char)(cartasHum->datos[i]);
-        mostrarCarta(carta, i);
-        puts(""); // espacio entre cartas
-    }
+    mostrarCartasEnLinea(cartasHum);
 
-    puts("================================\n");
+    puts("=========================================\n");
 }
 
 int repartirCartas(tPila *mazo, tVectorCartas *jugHum, tVectorCartas *jugMaq) {
@@ -73,6 +105,8 @@ int jugar(char nombre[], int dificultad)
                   puntajeHum = 0,
                   puntajeMaq = 0;
 
+    unsigned char opcion;
+
     crearPila(&mazoJuego);
     crearVector(&cartasHum);
     crearVector(&cartasMaq);
@@ -88,7 +122,12 @@ int jugar(char nombre[], int dificultad)
 
     while( puntajeHum < 12 && puntajeMaq < 12)
     {
+        system("cls"); // LIMPIA PANTALLA en Windows. En Linux usar "clear"
+        mostrarTablero(puntajeHum, puntajeMaq, &cartasHum);
 
+        // luego hacés que el jugador elija una carta
+        printf("Elegí una carta (1 a %d): ", cartasHum.cantElem);
+        scanf("%d", &opcion);
     }
 
     vaciarCola(&informeJuego);
