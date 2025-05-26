@@ -1,9 +1,35 @@
 #include "comun.h"
-/*
+
+#define CANT_REPARTO 3
+
+int repartirCartas(tPila *mazo, tVectorCartas *jugHum, tVectorCartas *jugMaq) {
+    signed char carta,
+                    i;
+
+    for (i = 0; i < CANT_REPARTO; i++) {
+        // Jugador humano
+        if (!desapilar(mazo, &carta, sizeof(signed char)))
+            return VACIO;
+        if (!vector_insertar(jugHum, carta))
+            return SIN_MEM;
+
+        // Máquina
+        if (!desapilar(mazo, &carta, sizeof(signed char)))
+            return VACIO;
+        if (!vector_insertar(jugMaq, carta))
+            return SIN_MEM;
+    }
+
+    return REALIZADO;
+}
+
 int jugar(char nombre[], int dificultad)
 {
-    tPila mazoJuego,
-          mazoDescarte;
+    tPila mazoJuego;
+
+    tVectorCartas cartasHum,
+                  cartasMaq,
+                  mazoDescarte;
 
     tCola informeJuego;
 
@@ -12,7 +38,9 @@ int jugar(char nombre[], int dificultad)
                   puntajeMaq = 0;
 
     crearPila(&mazoJuego);
-    crearPila(&mazoDescarte);
+    crearVector(&cartasHum);
+    crearVector(&cartasMaq);
+    crearVector(&mazoDescarte);
     crearCola(&informeJuego);
 
     if(generarMazo(&mazoJuego)!= REALIZADO){
@@ -20,7 +48,7 @@ int jugar(char nombre[], int dificultad)
         return PILA_LLENA;
     }
 
-    repartirCartas()
+    repartirCartas(&mazoJuego,&cartasHum,&cartasMaq);
 
     while( puntajeHum < 12 && puntajeMaq < 12)
     {
@@ -29,9 +57,8 @@ int jugar(char nombre[], int dificultad)
 
     vaciarCola(&informeJuego);
     vaciarPila(&mazoJuego);
-    vaciarPila(&mazoDescarte);
 }
-*/
+
 
 
 int generarMazo(tPila *pMazo)
