@@ -10,10 +10,12 @@
 #include "TDA_VECTOR.h"
 #include "pila_head.h"
 #include "DoCe_head.h"
+#include "cola_head.h"
 
 #define REALIZADO 0
 #define SIN_MEM -3
 #define VACIO -4
+#define ERROR  -5
 
 #define MINIMO(x, y) ((x) <= (y) ? (x) : (y))
 

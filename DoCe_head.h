@@ -1,11 +1,10 @@
 #ifndef DOCE_HEAD_H_INCLUDED
 #define DOCE_HEAD_H_INCLUDED
 
-#include <curl/curl.h>
+//#include <curl/curl.h>
 
 #include "comun.h"
 
-#define ERROR_ARCH   -5
 
 #define SACAR_DOS    -2
 #define SACAR_UNO    -1
@@ -39,15 +38,19 @@ int generarMazo(tPila *mazo);
 int modoFACIL(int vecCartas[]);
 const char* decodificarCarta(int valor);
 int jugar(char nombre[], int dificultad);
+/*
 int generarInforme(tCola *informe, int ganador, char *nombreJugador);
 int leerConfiguracion(tApi* configuracion);
 int  enviarResultadoAPI(tApi* config, const char* nombre, int gano);
 int obtenerRanking(tApi *config);
 size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp);
 void eliminarRanking(tApi* config);
-
+*/
 
 int generarMazo(tPila *p);
-int apilarCartas(tPila *p, int *cartas, int cantidad);
+void mostrarCartasEnLinea(const tVectorCartas *cartas);
+void mostrarTablero(unsigned char puntosHum, unsigned char puntosMaq, const tVectorCartas *cartasHum);
+int agregarCartas(tVectorCartas* vec, signed char carta, unsigned char cantidad);
+signed char elegirCartaHumano(tVectorCartas* cartasHum);
 
 #endif // DOCE_HEAD_H_INCLUDED

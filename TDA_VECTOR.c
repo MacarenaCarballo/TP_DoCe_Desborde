@@ -7,7 +7,7 @@ void crearVector(tVectorCartas *vec) {
 
 // Inserta una carta al final del vector
 int insVecAlFinal(tVectorCartas *vec, signed char carta) {
-    if (vec->cantElem >= MAX_CARTAS)
+    if (vec->cantElem == MAX_CARTAS)
         return SIN_MEM;
 
     vec->datos[vec->cantElem++] = carta;
@@ -33,13 +33,19 @@ int sacarUltVec(tVectorCartas *vec, signed char *carta) {
     return REALIZADO;
 }
 
-// Acceso por índice (solo lectura)
-int verCartaPorPos(const tVectorCartas *vec, unsigned pos, signed char *carta) {
-    if (pos >= vec->cantElem)
-        return SIN_MEM;
+int elimPorPosVec(tVectorCartas *vec, unsigned pos, signed char *cartaEliminada) {
+    if (!vec || pos >= vec->cantElem || !cartaEliminada)
+        return ERROR; // Error por posición inválida o puntero nulo
 
-    *carta = vec->datos[pos];
-    return REALIZADO;
+    *cartaEliminada = vec->datos[pos]; // Guardar la carta eliminada
+
+    // Desplazar los elementos para tapar el hueco
+    for (unsigned i = pos; i < vec->cantElem - 1; ++i)
+        vec->datos[i] = vec->datos[i + 1];
+
+    vec->cantElem--; // Actualizar cantidad de elementos
+
+    return REALIZADO; // Éxito
 }
 
 void vaciarVector(tVectorCartas *vec)

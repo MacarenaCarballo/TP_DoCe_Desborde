@@ -41,7 +41,7 @@ int main()
             printf("\n\nFin del juego.\n");
             system("cls");
             break;
-
+/*
         case 'B':
             tApi config;
             if(leerConfiguracion(&config)!= REALIZADO)
@@ -55,6 +55,7 @@ int main()
             obtenerRanking(&config);
 
             break;
+    */
         case 'C':
             puts("\nSaliendo...\n");
             break;
