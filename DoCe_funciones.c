@@ -463,7 +463,94 @@ int generarMazo(tPila *pMazo)
     return REALIZADO;
 }
 
+/*
+signed char modoFACIL(tVectorCartas *vecCartas, unsigned char *pjeMaquina, unsigned char *pjeHumano, signed char *jugadaHumano)
+{
+    srand(time(NULL));
 
+    int numero = rand() % vecCartas->cantElem;
+    signed char carta;
+
+    verCartaPorPos(vecCartas,numero, &carta)
+
+    return carta;
+}
+
+signed char modoMEDIO(tVectorCartas *vecCartas, unsigned char *pjeMaquina, unsigned char *pjeHumano, signed char *jugadaHumano)
+{
+    signed char cartaMaq;
+    int i;
+
+    if(*pjeMaquina>CERCA_GANAR)
+    {
+        for(i=0; i<vecCartas->cantElem; i++)
+        {
+            if(verCartaPorPos(vecCartas,i,&cartaMaq)==REALIZADO)
+            {
+
+                if((cartaMaq==MAS_UNO)||(cartaMaq==MAS_DOS))
+                    return cartaMaq;
+            }
+        }
+    }
+    else if (*pjeHumano==0)
+    {
+        for(i=0; i<vecCartas->cantElem; i++)
+        {
+            if(verCartaPorPos(vecCartas,i,&cartaMaq)==REALIZADO)
+            {
+                if((cartaMaq!=SACAR_UNO)&&(cartaMaq!=SACAR_DOS))
+                    return cartaMaq;
+            }
+        }
+    }
+
+    return modoFACIL(vec,pjeMaquina,pjeHumano,jugadaHumano);
+}
+
+signed char modoDIFICIL(tVectorCartas *vecCartas, unsigned char *pjeMaquina, unsigned char *pjeHumano, signed char *jugadaHumano)
+{
+    int i,
+        posRepetir,
+        cartasBuenas=0,
+        hayRepetir =0;
+    signed char cartaMaq;
+
+    for(i=0; i<vecCartas->cantElem; i++)
+    {
+        if(verCartaPorPos(vecCartas,i,&cartaMaq)==REALIZADO)
+        {
+
+            if((*jugadaHumano==SACAR_UNO)||(*jugadaHumano==SACAR_DOS))
+                if(cartaMaq==ESPEJO)
+                    return cartaMaq;
+
+            if(*pjeHumano > CERCA_GANAR)
+            {
+                if((cartaMaq==SACAR_UNO)||(cartaMaq==SACAR_DOS))
+                    return cartaMaq;
+            }
+
+            if((cartaMaq==MAS_UNO)||(cartaMaq==MAS_DOS))
+                cartasBuenas++;
+            //guardo posicion de la carta repetir turno
+            if(cartaMaq==REPETIR_TURNO)
+            {
+                hayRepetir=1;
+                posRepetir=i;
+            }
+        }
+    }
+
+    if((cartasBuenas>=2)&& hayRepetir)
+    {
+        if(verCartaPorPos(vecCartas,posRepetir,&cartaMaq)==REALIZADO)
+            return cartaMaq;
+    }
+
+    return modoMEDIO(vecCartas,pjeMaquina,pjeHumano,jugadaHumano);
+}
+*/
 
 const char* decodificarCarta(int valor)
 {
