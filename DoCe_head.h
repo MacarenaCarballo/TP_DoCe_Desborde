@@ -40,6 +40,7 @@ typedef struct
 int generarMazo(tPila *mazo);
 signed char modoFACIL(tVectorCartas *vecCartas, unsigned char *pjeMaquina, unsigned char *pjeHumano, signed char *jugadaHumano);
 signed char modoMEDIO(tVectorCartas *vecCartas, unsigned char *pjeMaquina, unsigned char *pjeHumano, signed char *jugadaHumano);
+signed char modoDIFICIL(tVectorCartas *vecCartas, unsigned char *pjeMaquina, unsigned char *pjeHumano, signed char *jugadaHumano);
 const char* decodificarCarta(int valor);
 int jugar(char nombre[], int dificultad);
 int generarInforme(tCola *informe, int ganador, char *nombreJugador);
