@@ -17,6 +17,8 @@
 #define GANO_MAQUINA  5
 #define GANO_HUMANO   6
 
+#define CERCA_GANAR   8
+
 #define TAM_NOMBRES   15
 
 
@@ -36,7 +38,8 @@ typedef struct
 }tApi;
 
 int generarMazo(tPila *mazo);
-int modoFACIL(int vecCartas[]);
+signed char modoFACIL(tVectorCartas *vecCartas, unsigned char *pjeMaquina, unsigned char *pjeHumano, signed char *jugadaHumano);
+signed char modoMEDIO(tVectorCartas *vecCartas, unsigned char *pjeMaquina, unsigned char *pjeHumano, signed char *jugadaHumano);
 const char* decodificarCarta(int valor);
 int jugar(char nombre[], int dificultad);
 int generarInforme(tCola *informe, int ganador, char *nombreJugador);
