@@ -2,57 +2,193 @@
 
 #define CANT_REPARTO 3
 
-int aplicarEfecto(int efecto, int* puntajeHum, int* puntajeMaq, unsigned char* nroDeTurno, tCola* informeJuego, const char* jugadorActual)
+signed char modoFACIL(const tEstadoJuego* estadoDeJuego)
 {
-    char mensaje[100];
-    char detalleTurno[256];
+    srand(time(NULL));
+
+    int numero = rand() % 3;
+
+    return estadoDeJuego->cartas->datos[numero];
+}
+
+signed char modoMEDIO(const tEstadoJuego* estadoDeJuego)
+{
+    return 0;
+}
+signed char modoDIFICIL(const tEstadoJuego* estadoDeJuego)
+{
+    return 0;
+}
+
+int reponerCarta(tPila* mazoJuego, tVectorCartas* mazoDescarte, tVectorCartas* mano)
+{
+    signed char nuevaCarta;
+
+    // Intentar sacar una carta del mazo
+    if (desapilar(mazoJuego, &nuevaCarta, sizeof(nuevaCarta)) == VACIO) {
+        // Mezclar descarte y reponer el mazo
+        mezclarVector(mazoDescarte);
+
+        while (sacarUltVec(mazoDescarte, &nuevaCarta) == REALIZADO) {
+            apilar(mazoJuego, &nuevaCarta, sizeof(nuevaCarta));
+        }
+
+        // Intentar de nuevo
+        if (desapilar(mazoJuego, &nuevaCarta, sizeof(nuevaCarta)) == VACIO) {
+            puts("No se pudo recargar el mazo. Juego terminado.");
+            return VACIO;
+        }
+    }
+
+    // Agregar la nueva carta a la mano del jugador
+    return insVecAlFinal(mano, nuevaCarta);
+}
+signed char aplicarEfecto(signed char efecto,
+                          unsigned char* puntajeActual,
+                          unsigned char* puntajeOponente,
+                          unsigned char* nroDeTurno,
+                          tCola* informeJuego,
+                          const char* nombreJugadorActual,
+                          const char* nombreOponente,
+                          int esHumano,
+                          signed char* ultimoEfectoOponente)
+{
+    char mensaje[150];
+    char detalleTurno[300];
+    signed char resultado = REALIZADO;
 
     switch(efecto)
     {
     case SACAR_DOS:    // -2
     case SACAR_UNO:    // -1
-        *puntajeMaq += efecto;  // Resta puntos (efecto es negativo)
-        if(*puntajeMaq < 0) *  puntajeMaq = 0;
-        snprintf(mensaje, sizeof(mensaje), "%s jugó carta %s. Magutna pierde %d punto%s.",
-                 jugadorActual,
+        *puntajeOponente += efecto;
+        if (*puntajeOponente < 0)
+            *puntajeOponente = 0;
+
+        snprintf(mensaje, sizeof(mensaje),
+                 "%s jugó carta %s. %s pierde %d punto%s.",
+                 nombreJugadorActual,
                  (efecto == SACAR_UNO) ? "SACAR_UNO" : "SACAR_DOS",
+                 nombreOponente,
                  -efecto,
                  (efecto == SACAR_UNO) ? "" : "s");
+
+        *ultimoEfectoOponente = efecto;  // Guardamos por si viene ESPEJO
         break;
 
-    case MAS_UNO:     // +1
-    case MAS_DOS:     // +2
-        *puntajeHum += efecto;
-        snprintf(mensaje, sizeof(mensaje), "%s jugó carta %s. ¡Gana %d punto%s!",
-                 jugadorActual,
+    case MAS_UNO:
+    case MAS_DOS:
+        *puntajeActual += efecto;
+
+        snprintf(mensaje, sizeof(mensaje),
+                 "%s jugó carta %s. ¡Gana %d punto%s!",
+                 nombreJugadorActual,
                  (efecto == MAS_UNO) ? "MAS_UNO" : "MAS_DOS",
                  efecto,
                  (efecto == MAS_UNO) ? "" : "s");
+
+        if (*puntajeActual >= 12)
+            resultado = esHumano ? GANO_HUMANO : GANO_MAQUINA;
         break;
 
-    case REPETIR_TURNO:  // 3
-        (*nroDeTurno)--;
-        snprintf(mensaje, sizeof(mensaje), "%s jugó carta REPETIR_TURNO. ¡Juega otra vez!", jugadorActual);
+    case REPETIR_TURNO:
+        snprintf(mensaje, sizeof(mensaje),
+                 "%s jugó carta REPETIR_TURNO. ¡Juega otra vez!",
+                 nombreJugadorActual);
+
+        return REPETIR_TURNO;  // Retornar directamente para que el flujo lo repita
         break;
 
-    case ESPEJO:  // 4
-        // Devuelve el último efecto aplicado (ejemplo simplificado)
-        snprintf(mensaje, sizeof(mensaje), "%s jugó carta ESPEJO. ¡Magutna devuelve el ataque!", jugadorActual);
-        // Aquí iría la lógica para invertir el último efecto (depende de tu implementación)
+    case ESPEJO:
+        if (*ultimoEfectoOponente == SACAR_UNO || *ultimoEfectoOponente == SACAR_DOS)
+        {
+            efecto = *ultimoEfectoOponente;
+
+            // Deshacer al actual y devolver al oponente
+            *puntajeActual -= efecto;
+            *puntajeOponente += efecto;
+
+            if (*puntajeActual < 0)
+                *puntajeActual = 0;
+            if (*puntajeOponente < 0)
+                *puntajeOponente = 0;
+
+            snprintf(mensaje, sizeof(mensaje),
+                     "%s jugó ESPEJO. ¡Devuelve el efecto de %d punto%s a %s!",
+                     nombreJugadorActual,
+                     -efecto,
+                     (efecto == SACAR_UNO) ? "" : "s",
+                     nombreOponente);
+        }
+        else
+        {
+            snprintf(mensaje, sizeof(mensaje),
+                     "%s jugó ESPEJO, pero no había efecto para devolver.",
+                     nombreJugadorActual);
+        }
         break;
     }
 
-    // Registra el estado completo del turno
-    snprintf(detalleTurno, sizeof(detalleTurno), "[Turno %d] %s\n  Puntos %s: %d\n  Puntos Magutna: %d\n",
+    snprintf(detalleTurno, sizeof(detalleTurno),
+             "[Turno %d] %s\n  Puntos %s: %d\n  Puntos %s: %d\n",
              *nroDeTurno,
              mensaje,
-             jugadorActual,
-             *puntajeHum,
-             *puntajeMaq);
+             nombreJugadorActual, *puntajeActual,
+             nombreOponente, *puntajeOponente);
 
-    ponerEnCola(informeJuego, detalleTurno, sizeof(256));
-    return 0;
+    ponerEnCola(informeJuego, detalleTurno, strlen(detalleTurno) + 1);
+
+    return resultado;
 }
+int ejecutarTurno(tVectorCartas *mazoDescarte,
+                  tPila *mazoJuego,
+                  int esHumano,
+                  tVectorCartas* cartas,
+                  signed char* efectoPendOponente,
+                  unsigned char * puntajeActual,
+                  unsigned char * puntajeOponente,
+                  unsigned char* nroDeTurno,
+                  tCola* informe,
+                  const char* nombreActual,
+                  const char* nombreOponente,
+                  tFuncionElegirCarta elegirCarta,
+                  tEstadoJuego* estadoJuego)
+{
+    signed char carta;
+    static signed char ultimoEfectoHumano = 0;
+    static signed char ultimoEfectoMaquina = 0;
+    signed char* ultimoEfectoOponente = esHumano ? &ultimoEfectoMaquina : &ultimoEfectoHumano;
+    signed char estado;
+    // Elegir carta (humano o IA)
+    carta = elegirCarta(estadoJuego);
+
+    // Aplicar efecto
+        estado = aplicarEfecto(carta,
+                               puntajeActual,
+                               puntajeOponente,
+                               nroDeTurno,
+                               informe,
+                               nombreActual,
+                               nombreOponente,
+                               esHumano,
+                               ultimoEfectoOponente);
+
+    // Guardar efecto aplicado, si corresponde
+    if (carta == SACAR_UNO || carta == SACAR_DOS)
+        *efectoPendOponente = carta;
+
+    //  Reposición de carta
+    if (reponerCarta(mazoJuego, mazoDescarte, cartas) != REALIZADO)
+        return VACIO;
+
+    // Si la carta fue REPETIR_TURNO, repetir este mismo jugador (no alternar)
+    if (carta == REPETIR_TURNO)
+        (*nroDeTurno)--;
+
+    return estado;
+}
+
+
 
 void mostrarCartasEnLinea(const tVectorCartas *cartas)
 {
@@ -83,7 +219,7 @@ void mostrarCartasEnLinea(const tVectorCartas *cartas)
     for (i = 0; i < cant; i++)
     {
         carta = (signed char)(cartas->datos[i]);
-        printf("|  %3d     |   ", carta);
+        printf("|   % 3d   |   ", carta);
     }
     printf("\n");
 
@@ -117,7 +253,7 @@ void mostrarCartasEnLinea(const tVectorCartas *cartas)
             break;
         }
 
-        printf("| %-8s|   ", nombre);
+         printf("| %-7s |   ", nombre);
     }
     printf("\n");
 
@@ -126,7 +262,7 @@ void mostrarCartasEnLinea(const tVectorCartas *cartas)
     printf("\n");
 
     // Índices debajo
-    for (i = 0; i < cant; i++) printf("   [%d]       ", i + 1);
+    for (i = 0; i < cant; i++) printf("    [%d]     ", i + 1);
     printf("\n");
 }
 
@@ -150,15 +286,17 @@ int repartirCartas(tPila *mazo, tVectorCartas *jugHum, tVectorCartas *jugMaq)
     for (i = 0; i < CANT_REPARTO; i++)
     {
         // Jugador humano
-        if (!desapilar(mazo, &carta, sizeof(signed char)))
+        if (desapilar(mazo, &carta, sizeof(signed char))!=REALIZADO)
             return VACIO;
-        if (!insVecAlFinal(jugHum, carta))
+
+        if (insVecAlFinal(jugHum, carta)!= REALIZADO)
             return SIN_MEM;
 
         // Máquina
-        if (!desapilar(mazo, &carta, sizeof(signed char)))
+        if (desapilar(mazo, &carta, sizeof(signed char))!=REALIZADO)
             return VACIO;
-        if (!insVecAlFinal(jugMaq, carta))
+
+        if (insVecAlFinal(jugMaq, carta)!=REALIZADO)
             return SIN_MEM;
     }
 
@@ -166,7 +304,7 @@ int repartirCartas(tPila *mazo, tVectorCartas *jugHum, tVectorCartas *jugMaq)
 }
 
 
-signed char elegirCartaHumano(tVectorCartas* cartasHum)
+signed char elegirCartaHumano(const tEstadoJuego* estado)
 {
     unsigned char opcion;   // Solo puede valer 1, 2 o 3
     int r;
@@ -185,7 +323,7 @@ signed char elegirCartaHumano(tVectorCartas* cartasHum)
     while (r != 1 || opcion < 1 || opcion > 3);
 
     // Eliminar carta de la posición (opcion - 1)
-    if (elimPorPosVec(cartasHum, opcion - 1, &carta) != REALIZADO)
+    if (elimPorPosVec(estado->cartas, opcion - 1, &carta) != REALIZADO)
     {
         printf("Error eliminando la carta del vector.\n");
         return VACIO;
@@ -194,83 +332,99 @@ signed char elegirCartaHumano(tVectorCartas* cartasHum)
     return carta;
 }
 
-int jugar(char nombre[], int dificultad)
-{
+unsigned char jugar(const char *nombre, tFuncionElegirCarta dificultadMaq) {
     tPila mazoJuego;
-
     tVectorCartas cartasHum,
                   cartasMaq,
                   mazoDescarte;
-
     tCola informeJuego;
 
-    unsigned char nroDeTurno = 1,
-                  puntajeHum = 0,
-                  puntajeMaq = 0;
+    unsigned char nroDeTurno = 1;
+    unsigned char puntajeHum = 0, puntajeMaq = 0;
+    signed char efectoPendHum = 0, efectoPendMaq = 0;
+   // signed char carta;
+    int estado;
 
-    signed char carta,
-           temporal;
+    tEstadoJuego estadoDeJuego;
+    // Turno dinámico
+    int esHumano = 1;
+    tVectorCartas* manoActual = &cartasHum;
+    tVectorCartas* manoOponente = &cartasMaq;
+    signed char* efectoOponente = &efectoPendMaq;
+    unsigned char* puntajeActual = &puntajeHum;
+    unsigned char* puntajeOponente = &puntajeMaq;
+    const char* nombreActual = nombre;
+    const char* nombreOponente = "Maquina";
+    signed char (*elegirCarta)(const tEstadoJuego*) = elegirCartaHumano;
 
-    int opcion;
-    int r;
-
+    // Inicializaciones
     crearPila(&mazoJuego);
     crearVector(&cartasHum);
     crearVector(&cartasMaq);
     crearVector(&mazoDescarte);
     crearCola(&informeJuego);
 
-    if(generarMazo(&mazoJuego)!= REALIZADO)
-    {
+    if (generarMazo(&mazoJuego) != REALIZADO) {
         puts("No se pudo generar el mazo de juego");
         return SIN_MEM;
     }
 
-    repartirCartas(&mazoJuego,&cartasHum,&cartasMaq);
+    repartirCartas(&mazoJuego, &cartasHum, &cartasMaq);
 
-    while( puntajeHum < 12 && puntajeMaq < 12 )
-    {
+
+    while (puntajeHum < 12 && puntajeMaq < 12) {
         system("cls");
         mostrarTablero(puntajeHum, puntajeMaq, &cartasHum);
 
+        printf("Turno de %s:\n", nombreActual);
 
-        if((carta = elegirCartaHumano(&cartasHum))==VACIO)
-            return VACIO;
+        estado = ejecutarTurno(&mazoDescarte,
+                               &mazoJuego,
+                               esHumano,
+                               manoActual,
+                               efectoOponente,
+                               puntajeActual,
+                               puntajeOponente,
+                               &nroDeTurno,
+                               &informeJuego,
+                               nombreActual,
+                               nombreOponente,
+                               elegirCarta,
+                               &estadoDeJuego);
+        if (estado != REALIZADO)
+            break;
 
+        nroDeTurno++;
 
-        /*
-                    desapilar(carta, mazo)...
-                    insVecAlFinal(mazoDescarte)...
-                    insVecAlFinal(cartasHum)...
-        */
-        if(puntajeHum < 12)
-        {
-            if(carta ==SACAR_UNO || carta == SACAR_DOS)
-            {
-                temporal = carta;
-            }
-
-
-            /*
-                hacer
-            */
-            /**
-                1 o 2 aplique los efectos y modificar puntos
-                -2 o -1 estas cartas puede tirarme espejo
-            */
-
-            // juegaMAquina
-
+        // Invertir roles
+        esHumano = !esHumano;
+        if (esHumano) {
+            manoActual = &cartasHum;
+            manoOponente = &cartasMaq;
+            efectoOponente = &efectoPendMaq;
+            puntajeActual = &puntajeHum;
+            puntajeOponente = &puntajeMaq;
+            nombreActual = nombre;
+            nombreOponente = "Maquina";
+            elegirCarta = elegirCartaHumano;
+        } else {
+            manoActual = &cartasMaq;
+            manoOponente = &cartasHum;
+            efectoOponente = &efectoPendHum;
+            puntajeActual = &puntajeMaq;
+            puntajeOponente = &puntajeHum;
+            nombreActual = "Maquina";
+            nombreOponente = nombre;
+            elegirCarta = dificultadMaq; // puntero a función según modo
         }
-
-
-
     }
 
-    vaciarCola(&informeJuego);
-    vaciarPila(&mazoJuego);
+    // Finalizar cola (mostrar o guardar)
+    printf("\n--- Informe de juego ---\n");
+   // mostrarYVaciarCola(&informeJuego); // o guardarColaEnArchivo() si querés persistencia
 
-    return 0;
+    vaciarPila(&mazoJuego);
+    return estado;
 }
 
 
@@ -309,14 +463,7 @@ int generarMazo(tPila *pMazo)
     return REALIZADO;
 }
 
-int modoFACIL( int vecCartas[])
-{
-    srand(time(NULL));
 
-    int numero = rand() % 3;
-
-    return vecCartas[numero];
-}
 
 const char* decodificarCarta(int valor)
 {

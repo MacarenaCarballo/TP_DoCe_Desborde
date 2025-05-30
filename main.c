@@ -6,6 +6,9 @@ int main()
     char nombre[20];
     int dificultad;
     char opcion;
+    unsigned char finDelJuego;
+
+
     do
     {
         puts("--------MENU---------\n"
@@ -37,6 +40,15 @@ int main()
              scanf("%d", &dificultad);
             } while (dificultad < 1 || dificultad > 3);
             system("cls");
+
+            if(dificultad==1)
+                finDelJuego = jugar(nombre, modoFACIL);
+            else if(dificultad==2)
+                    finDelJuego = jugar(nombre, modoMEDIO);
+                 else
+                    finDelJuego = jugar(nombre, modoDIFICIL);
+
+
 
             printf("\n\nFin del juego.\n");
             system("cls");
