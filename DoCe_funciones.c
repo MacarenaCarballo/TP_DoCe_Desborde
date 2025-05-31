@@ -6,9 +6,13 @@ signed char modoFACIL(const tEstadoJuego* estadoDeJuego)
 {
     srand(time(NULL));
 
-    int numero = rand() % 3;
+    unsigned indice;
+    signed char cartaElegida;
 
-    return estadoDeJuego->cartas->datos[numero];
+    indice = rand() % 3;  // Elegí un índice entre 0 y 2
+    cartaElegida = estadoDeJuego->cartas->datos[indice];
+
+    return cartaElegida;
 }
 
 signed char modoMEDIO(const tEstadoJuego* estadoDeJuego)
@@ -322,9 +326,11 @@ signed char elegirCartaHumano(const tEstadoJuego* estado)
     }
     while (r != 1 || opcion < 1 || opcion > 3);
 
+
+
     // Eliminar carta de la posición (opcion - 1)
-    if (elimPorPosVec(estado->cartas, opcion - 1, &carta) != REALIZADO)
-    {
+
+    if (elimPorPosVec(estado->cartas, opcion - 1, &carta) != REALIZADO){
         printf("Error eliminando la carta del vector.\n");
         return VACIO;
     }
