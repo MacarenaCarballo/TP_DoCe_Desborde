@@ -6,28 +6,13 @@
 #include "comun.h"
 
 
-#define SACAR_DOS    -2
-#define SACAR_UNO    -1
-#define MAS_UNO       1
-#define MAS_DOS       2
-#define REPETIR_TURNO 3
-#define ESPEJO        4
-
-#define GANO_MAQUINA  5
-#define GANO_HUMANO   6
-
-#define CERCA_GANAR   8
-
-#define TAM_NOMBRES   15
-
-
 typedef struct
 {
     unsigned char numTurno;
     tVectorCartas cartaMaquina;
     tVectorCartas cartaJugador;
-    unsigned char puntosJugador;
-    unsigned char puntosMaquina;
+    signed char puntosJugador;
+    signed char puntosMaquina;
 } tInforme;
 
 typedef struct

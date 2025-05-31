@@ -16,8 +16,8 @@ int insVecAlFinal(tVectorCartas *vec, signed char carta) {
 
 int verCartaPorPos(const tVectorCartas *vec, unsigned pos, signed char *carta)
 {
-    if (pos >= CANT_CARTAS || vec->datos[pos] == VACIO)
-        return ERROR;
+    if (pos >= MAX_CARTAS || vec->datos[pos] == VACIO)
+        return ERROR_;
 
     *carta = vec->datos[pos];
     return REALIZADO;
@@ -44,7 +44,7 @@ int sacarUltVec(tVectorCartas *vec, signed char *carta) {
 
 int elimPorPosVec(tVectorCartas *vec, unsigned pos, signed char *cartaEliminada) {
     if (!vec || pos >= vec->cantElem || !cartaEliminada)
-        return ERROR; // Error por posición inválida o puntero nulo
+        return ERROR_; // Error por posición inválida o puntero nulo
 
     *cartaEliminada = vec->datos[pos]; // Guardar la carta eliminada
 
