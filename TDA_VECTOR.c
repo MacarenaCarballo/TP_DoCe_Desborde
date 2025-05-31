@@ -16,7 +16,7 @@ int insVecAlFinal(tVectorCartas *vec, signed char carta) {
 
 int verCartaPorPos(const tVectorCartas *vec, unsigned pos, signed char *carta)
 {
-    if (pos >= CANT_CARTAS || vec->datos[pos] == VACIO)
+    if (pos >= vec->cantElem || vec->datos[pos] == VACIO)
         return ERROR;
 
     *carta = vec->datos[pos];
