@@ -19,6 +19,7 @@ int verCartaPorPos(const tVectorCartas *vec, unsigned pos, signed char *carta)
     if (pos >= MAX_CARTAS || vec->datos[pos] == VACIO)
         return ERROR_;
 
+
     *carta = vec->datos[pos];
     return REALIZADO;
 }
