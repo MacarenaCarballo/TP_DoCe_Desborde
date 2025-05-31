@@ -48,7 +48,45 @@ signed char modoMEDIO(const tEstadoJuego* estadoDeJuego)
 }
 signed char modoDIFICIL(const tEstadoJuego* estadoDeJuego)
 {
-    return 0;
+    int i,
+        posRepetir,
+        cartasBuenas=0,
+        hayRepetir =0;
+    signed char cartaMaq;
+
+    for(i=0; i<estadoDeJuego->cartas->cantElem; i++)
+    {
+        if(verCartaPorPos(estadoDeJuego->cartas,i,&cartaMaq)==REALIZADO)
+        {
+
+            if((estadoDeJuego->ultimaCartaOponente==SACAR_UNO)||(estadoDeJuego->ultimaCartaOponente==SACAR_DOS))
+                if(cartaMaq==ESPEJO)
+                    return cartaMaq;
+
+            if(estadoDeJuego->puntajeHumano > CERCA_GANAR)
+            {
+                if((cartaMaq==SACAR_UNO)||(cartaMaq==SACAR_DOS))
+                    return cartaMaq;
+            }
+
+            if((cartaMaq==MAS_UNO)||(cartaMaq==MAS_DOS))
+                cartasBuenas++;
+            //guardo posicion de la carta repetir turno
+            if(cartaMaq==REPETIR_TURNO)
+            {
+                hayRepetir=1;
+                posRepetir=i;
+            }
+        }
+    }
+
+    if((cartasBuenas>=2)&& hayRepetir)
+    {
+        if(verCartaPorPos(estadoDeJuego->cartas,posRepetir,&cartaMaq)==REALIZADO)
+            return cartaMaq;
+    }
+
+    return modoMEDIO(estadoDeJuego);
 }
 
 int reponerCarta(tPila* mazoJuego, tVectorCartas* mazoDescarte, tVectorCartas* mano)
