@@ -58,15 +58,14 @@ int main()
 
         case 'B':
             tApi config;
-            if(leerConfiguracion(&config)!= REALIZADO)
+            if(leerConfiguracion(&config)== REALIZADO)
             {
                 printf("CODIGO DEL GRUPO: %s\n",config.codGrupo);
                 printf("URL DE LA API: %s\n",config.urlAPi);
+                obtenerRanking(&config);
                 }
                 else
                     printf("ERROR AL LEER LA CONFIGURACIONES DE LA API\n");
-
-            obtenerRanking(&config);
 
             break;
 

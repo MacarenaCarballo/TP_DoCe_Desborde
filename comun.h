@@ -34,6 +34,7 @@
 #define TAM_NOMBRES   15
 
 #define ERROR_ARCH -5;
+
 #define MINIMO(x, y) ((x) <= (y) ? (x) : (y))
 
 #endif // COMUN_H_INCLUDED

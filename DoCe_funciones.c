@@ -639,7 +639,7 @@ const char* decodificarCarta(int valor)
 
 int leerConfiguracion(tApi* configuracion)
 {
-    FILE *pf=fopen("configuracionesApi.txt", "r+t");
+    FILE *pf = fopen("configuracionesApi.txt", "r+t");
     char linea[100];
     char *act;
     if(!pf)
@@ -650,7 +650,6 @@ int leerConfiguracion(tApi* configuracion)
 
     fgets(linea,100,pf);
     fclose(pf);
-
     act = strchr(linea, '\n');
     if (act)
         *act = '\0';
@@ -659,7 +658,6 @@ int leerConfiguracion(tApi* configuracion)
     strcpy(configuracion->codGrupo,act+1);
     *act='\0';
     strcpy(configuracion->urlAPi,linea);
-
     return REALIZADO;
 }
 
@@ -717,8 +715,8 @@ int obtenerRanking(tApi *config)
     CURL *curl;
     CURLcode res;
     char urlCompleto[256];
+    bufferRanking[0]='\0';
     sprintf(urlCompleto, "%s/%s",config->urlAPi,config->codGrupo);
-    printf("%s\n",urlCompleto);
     curl_global_init(CURL_GLOBAL_DEFAULT);
     curl = curl_easy_init();
 
@@ -730,7 +728,8 @@ int obtenerRanking(tApi *config)
         curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
 
         //MUESTRA LA RESPUESTA
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, guardarRespuesta);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, bufferRanking);
 
         // SOLICITO GET
         res = curl_easy_perform(curl);
@@ -743,6 +742,7 @@ int obtenerRanking(tApi *config)
     }
 
     curl_global_cleanup();
+    mostrarRankingSimple(bufferRanking);
 
     return REALIZADO;
 }
@@ -787,4 +787,41 @@ void eliminarRanking(tApi* config)
     curl_global_cleanup();
 }
 
+void mostrarRankingSimple(char* json) {
+    char* p = json;
+    int pos = 1;
 
+    while ((p = strstr(p, "\"nombreJugador\"")) != NULL) {
+        char nombre[100] = "";
+        int ganadas = 0;
+
+        p = strchr(p, ':');
+        if (!p) break;
+        p += 2;
+
+
+        sscanf(p, "%[^\"]", nombre);
+        p = strstr(p, "\"cantidadPartidasGanadas\"");
+        if (!p) break;
+        p = strchr(p, ':');
+        if (!p) break;
+        p += 1;
+
+        sscanf(p, "%d", &ganadas);
+
+        printf("%d. %s - %d partidas ganadas\n", pos++, nombre, ganadas);
+
+        p++;
+    }
+    if (pos == 1) {
+        printf("No se encontraron jugadores.\n");
+    }
+}
+
+char bufferRanking[TAM_BUFFER] = "";
+
+size_t guardarRespuesta(void *contents, size_t size, size_t nmemb, void *userp) {
+    size_t tamReal = size * nmemb;
+    strncat((char*)userp, (char*)contents, tamReal);
+    return tamReal;
+}

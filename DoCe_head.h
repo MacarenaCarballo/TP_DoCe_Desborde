@@ -35,13 +35,15 @@ const char* decodificarCarta(int valor);
 unsigned char jugar(const char *nombre, tFuncionElegirCarta dificultadMaq);
 
 
-
-
+#define TAM_BUFFER 4096
+extern char bufferRanking[TAM_BUFFER]; //VARIABLE GLOBAL PARA HACER MAS AESTHETIC EL RANKING
 int leerConfiguracion(tApi* configuracion);
 int  enviarResultadoAPI(tApi* config, const char* nombre, int Agano);
 int obtenerRanking(tApi *config);
 size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp);
 void eliminarRanking(tApi* config);
+void mostrarRankingSimple(char* json);
+size_t guardarRespuesta(void* contents, size_t size, size_t nmemb, void* userp);//ES LO MISMO QUE WRITE CALLBACK PERO LO GUARDA EN UN CHAR PARA MODIFICAR EL JSON RECIBIDO
 
 
 void mostrarCartasEnLinea(const tVectorCartas *cartas);
