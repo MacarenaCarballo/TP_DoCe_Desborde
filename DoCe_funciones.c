@@ -32,10 +32,10 @@ signed char modoMEDIO(tEstadoJuego* estadoDeJuego)
 
                 if((cartaMaq==MAS_UNO)||(cartaMaq==MAS_DOS))
                 {
-                        if (elimPorPosVec(estadoDeJuego->cartas, i, &cartaMaq) != REALIZADO)
-                            return VACIO;
+                    if (elimPorPosVec(estadoDeJuego->cartas, i, &cartaMaq) != REALIZADO)
+                        return VACIO;
 
-                        return cartaMaq;
+                    return cartaMaq;
                 }
 
             }
@@ -49,10 +49,10 @@ signed char modoMEDIO(tEstadoJuego* estadoDeJuego)
             {
                 if((cartaMaq!=SACAR_UNO)&&(cartaMaq!=SACAR_DOS))
                 {
-                        if (elimPorPosVec(estadoDeJuego->cartas, i, &cartaMaq) != REALIZADO)
-                            return VACIO;
+                    if (elimPorPosVec(estadoDeJuego->cartas, i, &cartaMaq) != REALIZADO)
+                        return VACIO;
 
-                        return cartaMaq;
+                    return cartaMaq;
                 }
             }
         }
@@ -76,22 +76,22 @@ signed char modoDIFICIL( tEstadoJuego* estadoDeJuego)
 
             if((*(estadoDeJuego->ultimaCartaOponente)==SACAR_UNO)||(*(estadoDeJuego->ultimaCartaOponente)==SACAR_DOS))
                 if(cartaMaq==ESPEJO)
-                    {
-                        if (elimPorPosVec(estadoDeJuego->cartas, i, &cartaMaq) != REALIZADO)
-                            return VACIO;
+                {
+                    if (elimPorPosVec(estadoDeJuego->cartas, i, &cartaMaq) != REALIZADO)
+                        return VACIO;
 
-                        return cartaMaq;
-                    }
+                    return cartaMaq;
+                }
 
             if(*(estadoDeJuego->puntajeOponente) > CERCA_GANAR)
             {
                 if((cartaMaq==SACAR_UNO)||(cartaMaq==SACAR_DOS))
-                    {
-                        if (elimPorPosVec(estadoDeJuego->cartas, i, &cartaMaq) != REALIZADO)
-                            return VACIO;
+                {
+                    if (elimPorPosVec(estadoDeJuego->cartas, i, &cartaMaq) != REALIZADO)
+                        return VACIO;
 
-                        return cartaMaq;
-                    }
+                    return cartaMaq;
+                }
             }
 
             if((cartaMaq==MAS_UNO)||(cartaMaq==MAS_DOS))
@@ -108,12 +108,12 @@ signed char modoDIFICIL( tEstadoJuego* estadoDeJuego)
     if((cartasBuenas>=2)&& hayRepetir)
     {
         if(verCartaPorPos(estadoDeJuego->cartas,posRepetir,&cartaMaq)==REALIZADO)
-                    {
-                        if (elimPorPosVec(estadoDeJuego->cartas, i, &cartaMaq) != REALIZADO)
-                            return VACIO;
+        {
+            if (elimPorPosVec(estadoDeJuego->cartas, i, &cartaMaq) != REALIZADO)
+                return VACIO;
 
-                        return cartaMaq;
-                    }
+            return cartaMaq;
+        }
     }
 
     return modoMEDIO(estadoDeJuego);
@@ -153,9 +153,7 @@ int reponerCarta(tPila* mazoJuego, tVectorCartas* mazoDescarte, tVectorCartas* m
     // Agregar la nueva carta a la mano del jugador
     return REALIZADO;
 }
-signed char aplicarEfecto(signed char efecto,
-                          tEstadoJuego *estado,
-                          tCola *informeJuego)
+signed char aplicarEfecto(signed char efecto,tEstadoJuego *estado,tCola *informeJuego)
 {
     char mensaje[150];
     char detalleTurno[300];
@@ -389,7 +387,7 @@ int repartirCartas(tPila *mazo, tVectorCartas *jugHum, tVectorCartas *jugMaq)
 
 signed char elegirCartaHumano(tEstadoJuego* estado)
 {
-    unsigned char opcion;   // Solo puede valer 1, 2 o 3
+    unsigned char opcion;
     int r;
     signed char carta;
 
@@ -397,7 +395,7 @@ signed char elegirCartaHumano(tEstadoJuego* estado)
     {
         printf("Elegi una carta (1 a 3): ");
         r = scanf("%hhu", &opcion);  // %hhu para unsigned char
-        while(getchar() != '\n');    // Limpiar buffer
+        while(getchar() != '\n');
 
         if (r != 1 || opcion < 1 || opcion > 3)
             printf("Entrada invalida. Intente nuevamente.\n");
@@ -418,11 +416,28 @@ signed char elegirCartaHumano(tEstadoJuego* estado)
 
     return carta;
 }
+
 int generarInforme(tCola *informe, unsigned char ganador, const char *nombreJugador)
 {
-    FILE *archivo = fopen("informe.txt", "wt");
-    if (!archivo)
-        return ERROR_;
+    char nombreArchivo[200];
+    time_t t = time(NULL);
+    struct tm* tm_info = localtime(&t);
+
+    sprintf(nombreArchivo,
+            "informe-juego_%04d-%02d-%02d-%02d-%02d.txt",
+            tm_info->tm_year + 1900,
+            tm_info->tm_mon + 1,
+            tm_info->tm_mday,
+            tm_info->tm_hour,
+            tm_info->tm_min
+           );
+
+    FILE* archivo=fopen(nombreArchivo,"wt");
+    if(!archivo)
+    {
+        printf("ERROR EN LA APERTURA DEL ARCHIVO INFORME\n");
+        return ERROR_ARCH;
+    }
 
     fprintf(archivo, "===== INFORME DE PARTIDA =====\n\n");
 
@@ -436,7 +451,8 @@ int generarInforme(tCola *informe, unsigned char ganador, const char *nombreJuga
     fprintf(archivo, "Detalle de turnos:\n\n");
 
     char mensaje[300];
-    while (!colaVacia(informe)) {
+    while (!colaVacia(informe))
+    {
         sacarDeCola(informe, mensaje, sizeof(mensaje));
         fprintf(archivo, "%s\n", mensaje);
     }
@@ -454,6 +470,7 @@ unsigned char jugar(const char *nombre, tFuncionElegirCarta dificultadMaq)
     signed char puntajeHum = 0, puntajeMaq = 0;
     signed char efectoPendHum = 0, efectoPendMaq = 0;
     unsigned char estado;
+    tApi config;
 
     int esHumano = 1;
 
@@ -550,6 +567,12 @@ unsigned char jugar(const char *nombre, tFuncionElegirCarta dificultadMaq)
     else
         printf("No se pudo generar el informe.\n");
 
+    leerConfiguracion(&config);
+    if(puntajeHum>=12)
+        enviarResultadoAPI(&config,nombre,1);
+    else
+        enviarResultadoAPI(&config,nombre,0);
+
     vaciarPila(&mazoJuego);
 
     return estado;
@@ -580,7 +603,6 @@ int generarMazo(tPila *pMazo)
 
     mezclarVector(&vecMazo);
 
-    // Suponiendo que cargar en la pila es:
     for(int i = 0; i < vecMazo.cantElem; i++)
     {
         if(apilar(pMazo, &vecMazo.datos[i], sizeof(signed char)) != REALIZADO)
@@ -593,172 +615,176 @@ int generarMazo(tPila *pMazo)
 
 
 
-
-   /*
-    const char* decodificarCarta(int valor)
+const char* decodificarCarta(int valor)
+{
+    switch (valor)
     {
-        switch (valor)
-        {
-        case MAS_UNO:
-            return "MAS_UNO";
-        case MAS_DOS:
-            return "MAS_DOS";
-        case SACAR_UNO:
-            return "SACAR_UNO";
-        case SACAR_DOS:
-            return "SACAR_DOS";
-        case REPETIR_TURNO:
-            return "REPETIR_TURNO";
-        case ESPEJO:
-            return "ESPEJO";
-        default:
-            return "CARTA_DESCONOCIDA";
-        }
+    case MAS_UNO:
+        return "MAS_UNO";
+    case MAS_DOS:
+        return "MAS_DOS";
+    case SACAR_UNO:
+        return "SACAR_UNO";
+    case SACAR_DOS:
+        return "SACAR_DOS";
+    case REPETIR_TURNO:
+        return "REPETIR_TURNO";
+    case ESPEJO:
+        return "ESPEJO";
+    default:
+        return "CARTA_DESCONOCIDA";
     }
-    */
-    /*
+}
 
 
-    int leerConfiguracion(tApi* configuracion)
+int leerConfiguracion(tApi* configuracion)
+{
+    FILE *pf=fopen("configuracionesApi.txt", "r+t");
+    char linea[100];
+    char *act;
+    if(!pf)
     {
-        FILE *pf=fopen("configuracionesApi.txt", "r+t");
-        char linea[100];
-        char *act;
-        if(!pf){
-            printf("ERROR AL ABRIR EL ARCHIVO\n");
-            return ERROR_ARCH;
-        }
-
-        fgets(linea,100,pf);
-        fclose(pf);
-
-        act = strchr(linea, '\n');
-        if (act)
-            *act = '\0';
-
-        act=strrchr(linea,'|');
-        strcpy(configuracion->codGrupo,act+1);
-        *act='\0';
-        strcpy(configuracion->urlAPi,linea);
-
-        return REALIZADO;
+        printf("ERROR AL ABRIR EL ARCHIVO\n");
+        return ERROR_ARCH;
     }
 
-    int  enviarResultadoAPI(tApi* config, const char* nombre, int gano)
-    {
-        CURL* curl;
-        CURLcode res;
-        char json[256];
+    fgets(linea,100,pf);
+    fclose(pf);
 
-        //JSON PARA LA API
-        sprintf(json,
+    act = strchr(linea, '\n');
+    if (act)
+        *act = '\0';
+
+    act=strrchr(linea,'|');
+    strcpy(configuracion->codGrupo,act+1);
+    *act='\0';
+    strcpy(configuracion->urlAPi,linea);
+
+    return REALIZADO;
+}
+
+int  enviarResultadoAPI(tApi* config, const char* nombre, int gano)
+{
+    CURL* curl;
+    CURLcode res;
+    char json[256];
+
+    //JSON PARA LA API
+    sprintf(json,
             "{\"codigoGrupo\":\"%s\",\"jugador\":{\"nombre\":\"%s\",\"vencedor\":%d}}",
             config->codGrupo, nombre, gano
-        );
+           );
 
 
-        curl_global_init(CURL_GLOBAL_ALL);
-        curl = curl_easy_init();
+    curl_global_init(CURL_GLOBAL_ALL);
+    curl = curl_easy_init();
 
-        if (curl) {
+    if (curl)
+    {
 
-            curl_easy_setopt(curl, CURLOPT_URL, config->urlAPi);
-            curl_easy_setopt(curl, CURLOPT_POSTFIELDS, json);
-
-
-            struct curl_slist* headers = NULL;
-            headers = curl_slist_append(headers, "Content-Type: application/json");
-            curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+        curl_easy_setopt(curl, CURLOPT_URL, config->urlAPi);
+        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, json);
 
 
-            curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
-
-            // SOLICITUD DE POST
-            res = curl_easy_perform(curl);
-
-            //VERIFICO ERROR
-            if (res != CURLE_OK) {
-                fprintf(stderr, "Error al enviar POST: %s\n", curl_easy_strerror(res));
-            }
+        struct curl_slist* headers = NULL;
+        headers = curl_slist_append(headers, "Content-Type: application/json");
+        curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
 
 
-            curl_slist_free_all(headers);
-            curl_easy_cleanup(curl);
+        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+
+        // SOLICITUD DE POST
+        res = curl_easy_perform(curl);
+
+        //VERIFICO ERROR
+        if (res != CURLE_OK)
+        {
+            fprintf(stderr, "Error al enviar POST: %s\n", curl_easy_strerror(res));
         }
 
-        curl_global_cleanup();
 
-        return REALIZADO;
+        curl_slist_free_all(headers);
+        curl_easy_cleanup(curl);
     }
 
-    int obtenerRanking(tApi *config)
+    curl_global_cleanup();
+
+    return REALIZADO;
+}
+
+int obtenerRanking(tApi *config)
+{
+    CURL *curl;
+    CURLcode res;
+    char urlCompleto[256];
+    sprintf(urlCompleto, "%s/%s",config->urlAPi,config->codGrupo);
+    printf("%s\n",urlCompleto);
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+    curl = curl_easy_init();
+
+    if (curl)
     {
-        CURL *curl;
-        CURLcode res;
-        char urlCompleto[256];
-        sprintf(urlCompleto, "%s/%s",config->urlAPi,config->codGrupo);
-        printf("%s\n",urlCompleto);
-        curl_global_init(CURL_GLOBAL_DEFAULT);
-        curl = curl_easy_init();
+        // CARGO EL URL DE GET
+        curl_easy_setopt(curl, CURLOPT_URL, urlCompleto);
 
-        if (curl) {
-            // CARGO EL URL DE GET
-            curl_easy_setopt(curl, CURLOPT_URL, urlCompleto);
+        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
 
-            curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+        //MUESTRA LA RESPUESTA
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
 
-            //MUESTRA LA RESPUESTA
-            curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+        // SOLICITO GET
+        res = curl_easy_perform(curl);
 
-            // SOLICITO GET
-            res = curl_easy_perform(curl);
+        if (res != CURLE_OK)
+        {
+            fprintf(stderr, "Error en la solicitud: %s\n", curl_easy_strerror(res));
+        }
+        curl_easy_cleanup(curl);
+    }
 
-            if (res != CURLE_OK) {
-                fprintf(stderr, "Error en la solicitud: %s\n", curl_easy_strerror(res));
-            }
-            curl_easy_cleanup(curl);
+    curl_global_cleanup();
+
+    return REALIZADO;
+}
+
+size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp)
+{
+    size_t realsize = size * nmemb;
+    printf("%.*s", (int)realsize, (char *)contents);
+    return realsize;
+}
+
+void eliminarRanking(tApi* config)
+{
+    CURL* curl;
+    CURLcode res;
+    char urlCompleto[256];
+    sprintf(urlCompleto, "%s/%s",config->urlAPi,config->codGrupo);
+    printf("%s\n",urlCompleto);
+
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+    curl = curl_easy_init();
+
+    if (curl)
+    {
+        curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "DELETE");
+        curl_easy_setopt(curl, CURLOPT_URL,urlCompleto);
+        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+        res = curl_easy_perform(curl);
+
+        if (res != CURLE_OK)
+        {
+            fprintf(stderr, "Error al hacer DELETE: %s\n", curl_easy_strerror(res));
+        }
+        else
+        {
+            printf("Ranking del grupo '%s' eliminado correctamente.\n", config->codGrupo);
         }
 
-        curl_global_cleanup();
-
-        return REALIZADO;
+        curl_easy_cleanup(curl);
     }
 
-    size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp)
-    {
-        size_t realsize = size * nmemb;
-        printf("%.*s", (int)realsize, (char *)contents);
-        return realsize;
-    }
-
-    void eliminarRanking(tApi* config)
-    {
-        CURL* curl;
-        CURLcode res;
-        char urlCompleto[256];
-        sprintf(urlCompleto, "%s/%s",config->urlAPi,config->codGrupo);
-        printf("%s\n",urlCompleto);
-
-        curl_global_init(CURL_GLOBAL_DEFAULT);
-        curl = curl_easy_init();
-
-        if (curl) {
-            curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "DELETE");
-            curl_easy_setopt(curl, CURLOPT_URL,urlCompleto);
-            curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
-            res = curl_easy_perform(curl);
-
-            if (res != CURLE_OK) {
-                fprintf(stderr, "Error al hacer DELETE: %s\n", curl_easy_strerror(res));
-            } else {
-                printf("Ranking del grupo '%s' eliminado correctamente.\n", config->codGrupo);
-            }
-
-            curl_easy_cleanup(curl);
-        }
-
-        curl_global_cleanup();
-    }
+    curl_global_cleanup();
+}
 
 
-    */

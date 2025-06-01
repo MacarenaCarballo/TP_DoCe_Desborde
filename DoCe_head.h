@@ -1,7 +1,7 @@
 #ifndef DOCE_HEAD_H_INCLUDED
 #define DOCE_HEAD_H_INCLUDED
 
-//#include <curl/curl.h>
+#include <curl/curl.h>
 
 #include "comun.h"
 
@@ -35,14 +35,14 @@ const char* decodificarCarta(int valor);
 unsigned char jugar(const char *nombre, tFuncionElegirCarta dificultadMaq);
 
 
-/*
+
 
 int leerConfiguracion(tApi* configuracion);
 int  enviarResultadoAPI(tApi* config, const char* nombre, int Agano);
 int obtenerRanking(tApi *config);
 size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp);
 void eliminarRanking(tApi* config);
-*/
+
 
 void mostrarCartasEnLinea(const tVectorCartas *cartas);
 void mostrarTablero(unsigned char puntosHum, unsigned char puntosMaq, const tVectorCartas *cartasHum);
