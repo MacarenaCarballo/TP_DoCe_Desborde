@@ -1,0 +1,438 @@
+===== INFORME DE PARTIDA =====
+
+Ganador: Nelson
+
+Detalle de turnos:
+
+[Turno 1] Nelson jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos Nelson: 2
+  Puntos Maquina: 0
+
+[Turno 2] Maquina jugo carta SACAR_UNO. Nelson pierde 1 punto.
+  Puntos Maquina: 0
+  Puntos Nelson: 1
+
+[Turno 3] Nelson jugo ESPEJO. Devuelve el efecto de -1 punto a Maquina!
+  Puntos Nelson: 2
+  Puntos Maquina: 0
+
+[Turno 4] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 1
+  Puntos Nelson: 2
+
+[Turno 5] Nelson jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos Nelson: 2
+  Puntos Maquina: 0
+
+[Turno 6] Maquina jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos Maquina: 2
+  Puntos Nelson: 2
+
+[Turno 7] Nelson jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos Nelson: 2
+  Puntos Maquina: 2
+
+[Turno 8] Nelson jugo carta SACAR_DOS. Maquina pierde 2 puntos.
+  Puntos Nelson: 2
+  Puntos Maquina: 0
+
+[Turno 9] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 1
+  Puntos Nelson: 2
+
+[Turno 10] Nelson jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Nelson: 3
+  Puntos Maquina: 1
+
+[Turno 11] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 2
+  Puntos Nelson: 3
+
+[Turno 12] Nelson jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos Nelson: 3
+  Puntos Maquina: 1
+
+[Turno 13] Maquina jugo carta SACAR_UNO. Nelson pierde 1 punto.
+  Puntos Maquina: 1
+  Puntos Nelson: 2
+
+[Turno 14] Nelson jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Nelson: 3
+  Puntos Maquina: 1
+
+[Turno 15] Maquina jugo carta SACAR_UNO. Nelson pierde 1 punto.
+  Puntos Maquina: 1
+  Puntos Nelson: 2
+
+[Turno 16] Nelson jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos Nelson: 2
+  Puntos Maquina: 1
+
+[Turno 17] Nelson jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Nelson: 3
+  Puntos Maquina: 1
+
+[Turno 18] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 2
+  Puntos Nelson: 3
+
+[Turno 19] Nelson jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Nelson: 4
+  Puntos Maquina: 2
+
+[Turno 20] Maquina jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos Maquina: 4
+  Puntos Nelson: 4
+
+[Turno 21] Nelson jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos Nelson: 6
+  Puntos Maquina: 4
+
+[Turno 22] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 5
+  Puntos Nelson: 6
+
+[Turno 23] Nelson jugo carta SACAR_DOS. Maquina pierde 2 puntos.
+  Puntos Nelson: 6
+  Puntos Maquina: 3
+
+[Turno 24] Maquina jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos Maquina: 3
+  Puntos Nelson: 6
+
+[Turno 25] Maquina jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos Maquina: 3
+  Puntos Nelson: 6
+
+[Turno 26] Maquina jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos Maquina: 3
+  Puntos Nelson: 6
+
+[Turno 27] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 4
+  Puntos Nelson: 6
+
+[Turno 28] Nelson jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos Nelson: 8
+  Puntos Maquina: 4
+
+[Turno 29] Maquina jugo carta SACAR_DOS. Nelson pierde 2 puntos.
+  Puntos Maquina: 4
+  Puntos Nelson: 6
+
+[Turno 30] Nelson jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos Nelson: 6
+  Puntos Maquina: 3
+
+[Turno 31] Maquina jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos Maquina: 5
+  Puntos Nelson: 6
+
+[Turno 32] Nelson jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos Nelson: 6
+  Puntos Maquina: 4
+
+[Turno 33] Maquina jugo carta SACAR_DOS. Nelson pierde 2 puntos.
+  Puntos Maquina: 4
+  Puntos Nelson: 4
+
+[Turno 34] Nelson jugo ESPEJO. Devuelve el efecto de -2 puntos a Maquina!
+  Puntos Nelson: 6
+  Puntos Maquina: 2
+
+[Turno 35] Maquina jugo carta SACAR_DOS. Nelson pierde 2 puntos.
+  Puntos Maquina: 2
+  Puntos Nelson: 4
+
+[Turno 36] Nelson jugo ESPEJO. Devuelve el efecto de -2 puntos a Maquina!
+  Puntos Nelson: 6
+  Puntos Maquina: 0
+
+[Turno 37] Maquina jugo carta SACAR_DOS. Nelson pierde 2 puntos.
+  Puntos Maquina: 0
+  Puntos Nelson: 4
+
+[Turno 38] Nelson jugo ESPEJO. Devuelve el efecto de -2 puntos a Maquina!
+  Puntos Nelson: 6
+  Puntos Maquina: 0
+
+[Turno 39] Maquina jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos Maquina: 0
+  Puntos Nelson: 6
+
+[Turno 40] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 1
+  Puntos Nelson: 6
+
+[Turno 41] Nelson jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Nelson: 7
+  Puntos Maquina: 1
+
+[Turno 42] Maquina jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos Maquina: 1
+  Puntos Nelson: 7
+
+[Turno 43] Maquina jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos Maquina: 3
+  Puntos Nelson: 7
+
+[Turno 44] Nelson jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos Nelson: 9
+  Puntos Maquina: 3
+
+[Turno 45] Maquina jugo ESPEJO, pero no habia efecto para devolver.
+  Puntos Maquina: 3
+  Puntos Nelson: 9
+
+[Turno 46] Nelson jugo carta SACAR_DOS. Maquina pierde 2 puntos.
+  Puntos Nelson: 9
+  Puntos Maquina: 1
+
+[Turno 47] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 2
+  Puntos Nelson: 9
+
+[Turno 48] Nelson jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos Nelson: 11
+  Puntos Maquina: 2
+
+[Turno 49] Maquina jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos Maquina: 2
+  Puntos Nelson: 11
+
+[Turno 50] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 3
+  Puntos Nelson: 11
+
+[Turno 51] Nelson jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos Nelson: 11
+  Puntos Maquina: 2
+
+[Turno 52] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 3
+  Puntos Nelson: 11
+
+[Turno 53] Nelson jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos Nelson: 11
+  Puntos Maquina: 2
+
+[Turno 54] Maquina jugo carta SACAR_DOS. Nelson pierde 2 puntos.
+  Puntos Maquina: 2
+  Puntos Nelson: 9
+
+[Turno 55] Nelson jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos Nelson: 9
+  Puntos Maquina: 1
+
+[Turno 56] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 2
+  Puntos Nelson: 9
+
+[Turno 57] Nelson jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos Nelson: 9
+  Puntos Maquina: 1
+
+[Turno 58] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 2
+  Puntos Nelson: 9
+
+[Turno 59] Nelson jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos Nelson: 9
+  Puntos Maquina: 1
+
+[Turno 60] Maquina jugo carta SACAR_DOS. Nelson pierde 2 puntos.
+  Puntos Maquina: 1
+  Puntos Nelson: 7
+
+[Turno 61] Nelson jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos Nelson: 9
+  Puntos Maquina: 1
+
+[Turno 62] Maquina jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos Maquina: 1
+  Puntos Nelson: 9
+
+[Turno 63] Maquina jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos Maquina: 3
+  Puntos Nelson: 9
+
+[Turno 64] Nelson jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos Nelson: 9
+  Puntos Maquina: 2
+
+[Turno 65] Maquina jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos Maquina: 2
+  Puntos Nelson: 9
+
+[Turno 66] Maquina jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos Maquina: 2
+  Puntos Nelson: 9
+
+[Turno 67] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 3
+  Puntos Nelson: 9
+
+[Turno 68] Nelson jugo carta SACAR_DOS. Maquina pierde 2 puntos.
+  Puntos Nelson: 9
+  Puntos Maquina: 1
+
+[Turno 69] Maquina jugo carta SACAR_DOS. Nelson pierde 2 puntos.
+  Puntos Maquina: 1
+  Puntos Nelson: 7
+
+[Turno 70] Nelson jugo ESPEJO. Devuelve el efecto de -2 puntos a Maquina!
+  Puntos Nelson: 9
+  Puntos Maquina: 0
+
+[Turno 71] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 1
+  Puntos Nelson: 9
+
+[Turno 72] Nelson jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos Nelson: 9
+  Puntos Maquina: 0
+
+[Turno 73] Maquina jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos Maquina: 2
+  Puntos Nelson: 9
+
+[Turno 74] Nelson jugo carta SACAR_DOS. Maquina pierde 2 puntos.
+  Puntos Nelson: 9
+  Puntos Maquina: 0
+
+[Turno 75] Maquina jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos Maquina: 0
+  Puntos Nelson: 9
+
+[Turno 76] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 1
+  Puntos Nelson: 9
+
+[Turno 77] Nelson jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos Nelson: 9
+  Puntos Maquina: 0
+
+[Turno 78] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 1
+  Puntos Nelson: 9
+
+[Turno 79] Nelson jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos Nelson: 9
+  Puntos Maquina: 0
+
+[Turno 80] Maquina jugo carta SACAR_DOS. Nelson pierde 2 puntos.
+  Puntos Maquina: 0
+  Puntos Nelson: 7
+
+[Turno 81] Nelson jugo ESPEJO. Devuelve el efecto de -2 puntos a Maquina!
+  Puntos Nelson: 9
+  Puntos Maquina: 0
+
+[Turno 82] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 1
+  Puntos Nelson: 9
+
+[Turno 83] Nelson jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Nelson: 10
+  Puntos Maquina: 1
+
+[Turno 84] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 2
+  Puntos Nelson: 10
+
+[Turno 85] Nelson jugo carta SACAR_DOS. Maquina pierde 2 puntos.
+  Puntos Nelson: 10
+  Puntos Maquina: 0
+
+[Turno 86] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 1
+  Puntos Nelson: 10
+
+[Turno 87] Nelson jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos Nelson: 10
+  Puntos Maquina: 1
+
+[Turno 88] Nelson jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos Nelson: 10
+  Puntos Maquina: 1
+
+[Turno 89] Nelson jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos Nelson: 10
+  Puntos Maquina: 0
+
+[Turno 90] Maquina jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos Maquina: 0
+  Puntos Nelson: 10
+
+[Turno 91] Maquina jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos Maquina: 2
+  Puntos Nelson: 10
+
+[Turno 92] Nelson jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos Nelson: 10
+  Puntos Maquina: 1
+
+[Turno 93] Maquina jugo carta SACAR_UNO. Nelson pierde 1 punto.
+  Puntos Maquina: 1
+  Puntos Nelson: 9
+
+[Turno 94] Nelson jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos Nelson: 11
+  Puntos Maquina: 1
+
+[Turno 95] Maquina jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos Maquina: 3
+  Puntos Nelson: 11
+
+[Turno 96] Nelson jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos Nelson: 11
+  Puntos Maquina: 3
+
+[Turno 97] Nelson jugo carta SACAR_DOS. Maquina pierde 2 puntos.
+  Puntos Nelson: 11
+  Puntos Maquina: 1
+
+[Turno 98] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 2
+  Puntos Nelson: 11
+
+[Turno 99] Nelson jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos Nelson: 11
+  Puntos Maquina: 1
+
+[Turno 100] Maquina jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos Maquina: 3
+  Puntos Nelson: 11
+
+[Turno 101] Nelson jugo carta SACAR_DOS. Maquina pierde 2 puntos.
+  Puntos Nelson: 11
+  Puntos Maquina: 1
+
+[Turno 102] Maquina jugo ESPEJO. Devuelve el efecto de -2 puntos a Nelson!
+  Puntos Maquina: 3
+  Puntos Nelson: 9
+
+[Turno 103] Nelson jugo ESPEJO. Devuelve el efecto de -2 puntos a Maquina!
+  Puntos Nelson: 11
+  Puntos Maquina: 1
+
+[Turno 104] Maquina jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos Maquina: 1
+  Puntos Nelson: 11
+
+[Turno 105] Maquina jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos Maquina: 3
+  Puntos Nelson: 11
+
+[Turno 106] Nelson jugo carta SACAR_DOS. Maquina pierde 2 puntos.
+  Puntos Nelson: 11
+  Puntos Maquina: 1
+
+[Turno 107] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 2
+  Puntos Nelson: 11
+
+[Turno 108] Nelson jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Nelson: 12
+  Puntos Maquina: 2
+

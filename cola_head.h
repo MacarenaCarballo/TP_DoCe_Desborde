@@ -8,10 +8,10 @@ void *dato;
 unsigned tam;
 struct sNodo *sig;}tNodo;
 
-typedef struct{
-tNodo* pri;
-tNodo* ult;
-}tCola;
+typedef struct {
+    tNodo* pri;
+    tNodo* ult;
+} tCola;
 
 void crearCola(tCola *cola);
 int ponerEnCola(tCola *cola,const void* dato,unsigned tam);

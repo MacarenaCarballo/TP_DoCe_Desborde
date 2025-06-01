@@ -199,7 +199,7 @@ signed char aplicarEfecto(signed char efecto,
 
     case REPETIR_TURNO:
         snprintf(mensaje, sizeof(mensaje),
-                 "%s jugo carta REPETIR_TURNO. ¡Juega otra vez!",
+                 "%s jugo carta REPETIR_TURNO. Juega otra vez!",
                  estado->nombreActual);
 
         resultado = REPETIR_TURNO;
@@ -224,7 +224,7 @@ signed char aplicarEfecto(signed char efecto,
         else
         {
             snprintf(mensaje, sizeof(mensaje),
-                     "%s jugo ESPEJO, pero no había efecto para devolver.",
+                     "%s jugo ESPEJO, pero no habia efecto para devolver.",
                      estado->nombreActual);
         }
         break;
@@ -418,7 +418,32 @@ signed char elegirCartaHumano(tEstadoJuego* estado)
 
     return carta;
 }
+int generarInforme(tCola *informe, unsigned char ganador, const char *nombreJugador)
+{
+    FILE *archivo = fopen("informe.txt", "wt");
+    if (!archivo)
+        return ERROR_;
 
+    fprintf(archivo, "===== INFORME DE PARTIDA =====\n\n");
+
+    if (ganador == GANO_HUMANO)
+        fprintf(archivo, "Ganador: %s\n\n", nombreJugador);
+    else if (ganador == GANO_MAQUINA)
+        fprintf(archivo, "Ganador: Maquina\n\n");
+    else
+        fprintf(archivo, "Ganador: Desconocido\n\n");
+
+    fprintf(archivo, "Detalle de turnos:\n\n");
+
+    char mensaje[300];
+    while (!colaVacia(informe)) {
+        sacarDeCola(informe, mensaje, sizeof(mensaje));
+        fprintf(archivo, "%s\n", mensaje);
+    }
+
+    fclose(archivo);
+    return REALIZADO;
+}
 unsigned char jugar(const char *nombre, tFuncionElegirCarta dificultadMaq)
 {
     tPila mazoJuego;
@@ -428,7 +453,7 @@ unsigned char jugar(const char *nombre, tFuncionElegirCarta dificultadMaq)
     unsigned char nroDeTurno = 1;
     signed char puntajeHum = 0, puntajeMaq = 0;
     signed char efectoPendHum = 0, efectoPendMaq = 0;
-    int estado;
+    unsigned char estado;
 
     int esHumano = 1;
 
@@ -519,11 +544,14 @@ unsigned char jugar(const char *nombre, tFuncionElegirCarta dificultadMaq)
         }
     }
 
-    // Informe final (opcional)
-    printf("\n--- Informe de juego ---\n");
-    // mostrarYVaciarCola(&informeJuego); // o guardar en archivo
+
+    if (generarInforme(&informeJuego, estado, nombre) == REALIZADO)
+        printf("Informe generado correctamente.\n");
+    else
+        printf("No se pudo generar el informe.\n");
 
     vaciarPila(&mazoJuego);
+
     return estado;
 }
 
@@ -589,48 +617,7 @@ int generarMazo(tPila *pMazo)
     }
     */
     /*
-    int generarInforme(tCola *informe, int ganador, char *nombreJugador)
-    {
-        tInforme jugada;
-        char nombreArchivo[100];
-        char *maq="MAQUINA";
-        time_t t = time(NULL);
-        struct tm* tm_info = localtime(&t); //ESTO ES UNA FUNCION PARA TENER EL DIA ACTUAL CON FECHA Y HORA
-        //SALE DE LA LIBRERIA <TIME.H>
 
-        sprintf(nombreArchivo,
-            "informe-juego_%04d-%02d-%02d-%02d-%02d.txt",
-            tm_info->tm_year + 1900,
-            tm_info->tm_mon + 1,
-            tm_info->tm_mday,
-            tm_info->tm_hour,
-            tm_info->tm_min
-        );
-
-        FILE* pInforme=fopen(nombreArchivo,"wt");
-        if(!pInforme)
-        {
-            printf("ERROR EN LA APERTURA DEL ARCHIVO INFORME\n");
-            return -1;
-        }
-
-        fprintf(pInforme,"INFORME DEL JUEGO\n\n");
-        while(colaVacia(informe)!=COLA_VACIA)
-        {
-            sacarDeCola(informe,&jugada,sizeof(tInforme));
-            fprintf(pInforme,"NUMERO DE TURNO:%d\n",jugada.numTurno);
-            fprintf(pInforme,"Carta Jugada por %s: %s\n",nombreJugador,jugada.cartaJugador);
-            fprintf(pInforme,"Carta Jugada por %s: %s\n",maq,jugada.cartaMaquina);
-            fprintf(pInforme,"Puntos Acumulados por %s: %d\n",nombreJugador,jugada.puntosJugador);
-            fprintf(pInforme,"Puntos Acumulados por %s: %d\n\n",maq,jugada.puntosMaquina);
-
-
-        }
-        fprintf(pInforme,"EL GANADOR DEL JUEGO ES: %s\n", ganador==5? nombreJugador: "MAQUINA");
-
-        fclose(pInforme);
-        return REALIZADO;
-    }
 
     int leerConfiguracion(tApi* configuracion)
     {

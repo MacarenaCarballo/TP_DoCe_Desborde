@@ -5,16 +5,6 @@
 
 #include "comun.h"
 
-
-typedef struct
-{
-    unsigned char numTurno;
-    tVectorCartas cartaMaquina;
-    tVectorCartas cartaJugador;
-    signed char puntosJugador;
-    signed char puntosMaquina;
-} tInforme;
-
 typedef struct
 {
     char codGrupo[10];
@@ -44,18 +34,16 @@ signed char elegirCartaHumano( tEstadoJuego* estado);
 const char* decodificarCarta(int valor);
 unsigned char jugar(const char *nombre, tFuncionElegirCarta dificultadMaq);
 
-/*
-int generarInforme(tCola *informe, unsigned char ganador, char *nombreJugador);
 
+/*
 
 int leerConfiguracion(tApi* configuracion);
-int  enviarResultadoAPI(tApi* config, const char* nombre, int gano);
+int  enviarResultadoAPI(tApi* config, const char* nombre, int Agano);
 int obtenerRanking(tApi *config);
 size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp);
 void eliminarRanking(tApi* config);
 */
 
-int generarMazo(tPila *p);
 void mostrarCartasEnLinea(const tVectorCartas *cartas);
 void mostrarTablero(unsigned char puntosHum, unsigned char puntosMaq, const tVectorCartas *cartasHum);
 int agregarCartas(tVectorCartas* vec, signed char carta, unsigned char cantidad);
