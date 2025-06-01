@@ -14,6 +14,15 @@ int insVecAlFinal(tVectorCartas *vec, signed char carta) {
     return REALIZADO;
 }
 
+int verCartaPorPos(const tVectorCartas *vec, unsigned pos, signed char *carta)
+{
+    if (pos >= vec->cantElem || vec->datos[pos] == VACIO)
+        return ERROR;
+
+    *carta = vec->datos[pos];
+    return REALIZADO;
+}
+
 // Mezcla el vector (Fisher-Yates)
 void mezclarVector(tVectorCartas *vec) {
     for (int i = vec->cantElem - 1; i > 0; i--) {

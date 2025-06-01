@@ -46,16 +46,11 @@ typedef struct {
 typedef signed char (*tFuncionElegirCarta)(const tEstadoJuego*);
 
 int generarMazo(tPila *mazo);
-<<<<<<< HEAD
 signed char modoFACIL(const tEstadoJuego* estadoDeJuego);
 signed char modoMEDIO(const tEstadoJuego* estadoDeJuego);
 signed char modoDIFICIL(const tEstadoJuego* estadoDeJuego);
 
-=======
-signed char modoFACIL(tVectorCartas *vecCartas, unsigned char *pjeMaquina, unsigned char *pjeHumano, signed char *jugadaHumano);
-signed char modoMEDIO(tVectorCartas *vecCartas, unsigned char *pjeMaquina, unsigned char *pjeHumano, signed char *jugadaHumano);
-signed char modoDIFICIL(tVectorCartas *vecCartas, unsigned char *pjeMaquina, unsigned char *pjeHumano, signed char *jugadaHumano);
->>>>>>> f73a0ab4e442e8325077a8cdd2288f091680b091
+
 const char* decodificarCarta(int valor);
 unsigned char jugar(const char *nombre, tFuncionElegirCarta dificultadMaq);
 /*
@@ -71,6 +66,6 @@ int generarMazo(tPila *p);
 void mostrarCartasEnLinea(const tVectorCartas *cartas);
 void mostrarTablero(unsigned char puntosHum, unsigned char puntosMaq, const tVectorCartas *cartasHum);
 int agregarCartas(tVectorCartas* vec, signed char carta, unsigned char cantidad);
-signed char elegirCartaHumano(tVectorCartas* cartasHum);
+signed char elegirCartaHumano(const tEstadoJuego* estado);
 
 #endif // DOCE_HEAD_H_INCLUDED
