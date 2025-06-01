@@ -32,12 +32,13 @@ typedef struct {
     const char* nombreOponente;
 } tEstadoJuego;
 
-typedef signed char (*tFuncionElegirCarta)(const tEstadoJuego*);
+typedef signed char (*tFuncionElegirCarta)( tEstadoJuego*);
 
 int generarMazo(tPila *mazo);
-signed char modoFACIL(const tEstadoJuego* estadoDeJuego);
-signed char modoMEDIO(const tEstadoJuego* estadoDeJuego);
-signed char modoDIFICIL(const tEstadoJuego* estadoDeJuego);
+signed char modoFACIL( tEstadoJuego* estadoDeJuego);
+signed char modoMEDIO( tEstadoJuego* estadoDeJuego);
+signed char modoDIFICIL( tEstadoJuego* estadoDeJuego);
+signed char elegirCartaHumano( tEstadoJuego* estado);
 
 
 const char* decodificarCarta(int valor);
@@ -58,6 +59,5 @@ int generarMazo(tPila *p);
 void mostrarCartasEnLinea(const tVectorCartas *cartas);
 void mostrarTablero(unsigned char puntosHum, unsigned char puntosMaq, const tVectorCartas *cartasHum);
 int agregarCartas(tVectorCartas* vec, signed char carta, unsigned char cantidad);
-signed char elegirCartaHumano(const tEstadoJuego* estado);
 
 #endif // DOCE_HEAD_H_INCLUDED

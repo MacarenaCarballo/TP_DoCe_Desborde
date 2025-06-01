@@ -2,7 +2,7 @@
 
 #define CANT_REPARTO 3
 
-signed char modoFACIL(const tEstadoJuego* estadoDeJuego)
+signed char modoFACIL(tEstadoJuego* estadoDeJuego)
 {
     if (!estadoDeJuego || estadoDeJuego->cartas->cantElem == 0)
         return VACIO;
@@ -17,14 +17,108 @@ signed char modoFACIL(const tEstadoJuego* estadoDeJuego)
 
     return carta;
 }
-signed char modoMEDIO(const tEstadoJuego* estadoDeJuego)
+
+signed char modoMEDIO(tEstadoJuego* estadoDeJuego)
 {
-    return 0;
+    signed char cartaMaq;
+    int i;
+
+    if(*(estadoDeJuego->puntajeActual) > CERCA_GANAR)
+    {
+        for(i=0; i<estadoDeJuego->cartas->cantElem; i++)
+        {
+            if(verCartaPorPos(estadoDeJuego->cartas,i,&cartaMaq)==REALIZADO)
+            {
+
+                if((cartaMaq==MAS_UNO)||(cartaMaq==MAS_DOS))
+                {
+                        if (elimPorPosVec(estadoDeJuego->cartas, i, &cartaMaq) != REALIZADO)
+                            return VACIO;
+
+                        return cartaMaq;
+                }
+
+            }
+        }
+    }
+    else if (*(estadoDeJuego->puntajeOponente) ==0)
+    {
+        for(i=0; i<estadoDeJuego->cartas->cantElem; i++)
+        {
+            if(verCartaPorPos(estadoDeJuego->cartas,i,&cartaMaq)==REALIZADO)
+            {
+                if((cartaMaq!=SACAR_UNO)&&(cartaMaq!=SACAR_DOS))
+                {
+                        if (elimPorPosVec(estadoDeJuego->cartas, i, &cartaMaq) != REALIZADO)
+                            return VACIO;
+
+                        return cartaMaq;
+                }
+            }
+        }
+    }
+
+    return modoFACIL(estadoDeJuego);
 }
-signed char modoDIFICIL(const tEstadoJuego* estadoDeJuego)
+
+signed char modoDIFICIL( tEstadoJuego* estadoDeJuego)
 {
-    return 0;
+    int i,
+        posRepetir,
+        cartasBuenas=0,
+        hayRepetir =0;
+    signed char cartaMaq;
+
+    for(i=0; i<estadoDeJuego->cartas->cantElem; i++)
+    {
+        if(verCartaPorPos(estadoDeJuego->cartas,i,&cartaMaq)==REALIZADO)
+        {
+
+            if((*(estadoDeJuego->ultimaCartaOponente)==SACAR_UNO)||(*(estadoDeJuego->ultimaCartaOponente)==SACAR_DOS))
+                if(cartaMaq==ESPEJO)
+                    {
+                        if (elimPorPosVec(estadoDeJuego->cartas, i, &cartaMaq) != REALIZADO)
+                            return VACIO;
+
+                        return cartaMaq;
+                    }
+
+            if(*(estadoDeJuego->puntajeOponente) > CERCA_GANAR)
+            {
+                if((cartaMaq==SACAR_UNO)||(cartaMaq==SACAR_DOS))
+                    {
+                        if (elimPorPosVec(estadoDeJuego->cartas, i, &cartaMaq) != REALIZADO)
+                            return VACIO;
+
+                        return cartaMaq;
+                    }
+            }
+
+            if((cartaMaq==MAS_UNO)||(cartaMaq==MAS_DOS))
+                cartasBuenas++;
+            //guardo posicion de la carta repetir turno
+            if(cartaMaq==REPETIR_TURNO)
+            {
+                hayRepetir=1;
+                posRepetir=i;
+            }
+        }
+    }
+
+    if((cartasBuenas>=2)&& hayRepetir)
+    {
+        if(verCartaPorPos(estadoDeJuego->cartas,posRepetir,&cartaMaq)==REALIZADO)
+                    {
+                        if (elimPorPosVec(estadoDeJuego->cartas, i, &cartaMaq) != REALIZADO)
+                            return VACIO;
+
+                        return cartaMaq;
+                    }
+    }
+
+    return modoMEDIO(estadoDeJuego);
 }
+
 
 int reponerCarta(tPila* mazoJuego, tVectorCartas* mazoDescarte, tVectorCartas* mano)
 {
@@ -293,7 +387,7 @@ int repartirCartas(tPila *mazo, tVectorCartas *jugHum, tVectorCartas *jugMaq)
 }
 
 
-signed char elegirCartaHumano(const tEstadoJuego* estado)
+signed char elegirCartaHumano(tEstadoJuego* estado)
 {
     unsigned char opcion;   // Solo puede valer 1, 2 o 3
     int r;
@@ -471,210 +565,213 @@ int generarMazo(tPila *pMazo)
 
 
 
-const char* decodificarCarta(int valor)
-{
-    switch (valor)
+
+   /*
+    const char* decodificarCarta(int valor)
     {
-    case MAS_UNO:
-        return "MAS_UNO";
-    case MAS_DOS:
-        return "MAS_DOS";
-    case SACAR_UNO:
-        return "SACAR_UNO";
-    case SACAR_DOS:
-        return "SACAR_DOS";
-    case REPETIR_TURNO:
-        return "REPETIR_TURNO";
-    case ESPEJO:
-        return "ESPEJO";
-    default:
-        return "CARTA_DESCONOCIDA";
+        switch (valor)
+        {
+        case MAS_UNO:
+            return "MAS_UNO";
+        case MAS_DOS:
+            return "MAS_DOS";
+        case SACAR_UNO:
+            return "SACAR_UNO";
+        case SACAR_DOS:
+            return "SACAR_DOS";
+        case REPETIR_TURNO:
+            return "REPETIR_TURNO";
+        case ESPEJO:
+            return "ESPEJO";
+        default:
+            return "CARTA_DESCONOCIDA";
+        }
     }
-}
-/*
-int generarInforme(tCola *informe, int ganador, char *nombreJugador)
-{
-    tInforme jugada;
-    char nombreArchivo[100];
-    char *maq="MAQUINA";
-    time_t t = time(NULL);
-    struct tm* tm_info = localtime(&t); //ESTO ES UNA FUNCION PARA TENER EL DIA ACTUAL CON FECHA Y HORA
-    //SALE DE LA LIBRERIA <TIME.H>
-
-    sprintf(nombreArchivo,
-        "informe-juego_%04d-%02d-%02d-%02d-%02d.txt",
-        tm_info->tm_year + 1900,
-        tm_info->tm_mon + 1,
-        tm_info->tm_mday,
-        tm_info->tm_hour,
-        tm_info->tm_min
-    );
-
-    FILE* pInforme=fopen(nombreArchivo,"wt");
-    if(!pInforme)
+    */
+    /*
+    int generarInforme(tCola *informe, int ganador, char *nombreJugador)
     {
-        printf("ERROR EN LA APERTURA DEL ARCHIVO INFORME\n");
-        return -1;
-    }
+        tInforme jugada;
+        char nombreArchivo[100];
+        char *maq="MAQUINA";
+        time_t t = time(NULL);
+        struct tm* tm_info = localtime(&t); //ESTO ES UNA FUNCION PARA TENER EL DIA ACTUAL CON FECHA Y HORA
+        //SALE DE LA LIBRERIA <TIME.H>
 
-    fprintf(pInforme,"INFORME DEL JUEGO\n\n");
-    while(colaVacia(informe)!=COLA_VACIA)
-    {
-        sacarDeCola(informe,&jugada,sizeof(tInforme));
-        fprintf(pInforme,"NUMERO DE TURNO:%d\n",jugada.numTurno);
-        fprintf(pInforme,"Carta Jugada por %s: %s\n",nombreJugador,jugada.cartaJugador);
-        fprintf(pInforme,"Carta Jugada por %s: %s\n",maq,jugada.cartaMaquina);
-        fprintf(pInforme,"Puntos Acumulados por %s: %d\n",nombreJugador,jugada.puntosJugador);
-        fprintf(pInforme,"Puntos Acumulados por %s: %d\n\n",maq,jugada.puntosMaquina);
+        sprintf(nombreArchivo,
+            "informe-juego_%04d-%02d-%02d-%02d-%02d.txt",
+            tm_info->tm_year + 1900,
+            tm_info->tm_mon + 1,
+            tm_info->tm_mday,
+            tm_info->tm_hour,
+            tm_info->tm_min
+        );
 
-
-    }
-    fprintf(pInforme,"EL GANADOR DEL JUEGO ES: %s\n", ganador==5? nombreJugador: "MAQUINA");
-
-    fclose(pInforme);
-    return REALIZADO;
-}
-
-int leerConfiguracion(tApi* configuracion)
-{
-    FILE *pf=fopen("configuracionesApi.txt", "r+t");
-    char linea[100];
-    char *act;
-    if(!pf){
-        printf("ERROR AL ABRIR EL ARCHIVO\n");
-        return ERROR_ARCH;
-    }
-
-    fgets(linea,100,pf);
-    fclose(pf);
-
-    act = strchr(linea, '\n');
-    if (act)
-        *act = '\0';
-
-    act=strrchr(linea,'|');
-    strcpy(configuracion->codGrupo,act+1);
-    *act='\0';
-    strcpy(configuracion->urlAPi,linea);
-
-    return REALIZADO;
-}
-
-int  enviarResultadoAPI(tApi* config, const char* nombre, int gano)
-{
-    CURL* curl;
-    CURLcode res;
-    char json[256];
-
-    //JSON PARA LA API
-    sprintf(json,
-        "{\"codigoGrupo\":\"%s\",\"jugador\":{\"nombre\":\"%s\",\"vencedor\":%d}}",
-        config->codGrupo, nombre, gano
-    );
-
-
-    curl_global_init(CURL_GLOBAL_ALL);
-    curl = curl_easy_init();
-
-    if (curl) {
-
-        curl_easy_setopt(curl, CURLOPT_URL, config->urlAPi);
-        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, json);
-
-
-        struct curl_slist* headers = NULL;
-        headers = curl_slist_append(headers, "Content-Type: application/json");
-        curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
-
-
-        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
-
-        // SOLICITUD DE POST
-        res = curl_easy_perform(curl);
-
-        //VERIFICO ERROR
-        if (res != CURLE_OK) {
-            fprintf(stderr, "Error al enviar POST: %s\n", curl_easy_strerror(res));
+        FILE* pInforme=fopen(nombreArchivo,"wt");
+        if(!pInforme)
+        {
+            printf("ERROR EN LA APERTURA DEL ARCHIVO INFORME\n");
+            return -1;
         }
 
+        fprintf(pInforme,"INFORME DEL JUEGO\n\n");
+        while(colaVacia(informe)!=COLA_VACIA)
+        {
+            sacarDeCola(informe,&jugada,sizeof(tInforme));
+            fprintf(pInforme,"NUMERO DE TURNO:%d\n",jugada.numTurno);
+            fprintf(pInforme,"Carta Jugada por %s: %s\n",nombreJugador,jugada.cartaJugador);
+            fprintf(pInforme,"Carta Jugada por %s: %s\n",maq,jugada.cartaMaquina);
+            fprintf(pInforme,"Puntos Acumulados por %s: %d\n",nombreJugador,jugada.puntosJugador);
+            fprintf(pInforme,"Puntos Acumulados por %s: %d\n\n",maq,jugada.puntosMaquina);
 
-        curl_slist_free_all(headers);
-        curl_easy_cleanup(curl);
-    }
 
-    curl_global_cleanup();
-
-    return REALIZADO;
-}
-
-int obtenerRanking(tApi *config)
-{
-    CURL *curl;
-    CURLcode res;
-    char urlCompleto[256];
-    sprintf(urlCompleto, "%s/%s",config->urlAPi,config->codGrupo);
-    printf("%s\n",urlCompleto);
-    curl_global_init(CURL_GLOBAL_DEFAULT);
-    curl = curl_easy_init();
-
-    if (curl) {
-        // CARGO EL URL DE GET
-        curl_easy_setopt(curl, CURLOPT_URL, urlCompleto);
-
-        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
-
-        //MUESTRA LA RESPUESTA
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
-
-        // SOLICITO GET
-        res = curl_easy_perform(curl);
-
-        if (res != CURLE_OK) {
-            fprintf(stderr, "Error en la solicitud: %s\n", curl_easy_strerror(res));
         }
-        curl_easy_cleanup(curl);
+        fprintf(pInforme,"EL GANADOR DEL JUEGO ES: %s\n", ganador==5? nombreJugador: "MAQUINA");
+
+        fclose(pInforme);
+        return REALIZADO;
     }
 
-    curl_global_cleanup();
-
-    return REALIZADO;
-}
-
-size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp)
-{
-    size_t realsize = size * nmemb;
-    printf("%.*s", (int)realsize, (char *)contents);
-    return realsize;
-}
-
-void eliminarRanking(tApi* config)
-{
-    CURL* curl;
-    CURLcode res;
-    char urlCompleto[256];
-    sprintf(urlCompleto, "%s/%s",config->urlAPi,config->codGrupo);
-    printf("%s\n",urlCompleto);
-
-    curl_global_init(CURL_GLOBAL_DEFAULT);
-    curl = curl_easy_init();
-
-    if (curl) {
-        curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "DELETE");
-        curl_easy_setopt(curl, CURLOPT_URL,urlCompleto);
-        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
-        res = curl_easy_perform(curl);
-
-        if (res != CURLE_OK) {
-            fprintf(stderr, "Error al hacer DELETE: %s\n", curl_easy_strerror(res));
-        } else {
-            printf("Ranking del grupo '%s' eliminado correctamente.\n", config->codGrupo);
+    int leerConfiguracion(tApi* configuracion)
+    {
+        FILE *pf=fopen("configuracionesApi.txt", "r+t");
+        char linea[100];
+        char *act;
+        if(!pf){
+            printf("ERROR AL ABRIR EL ARCHIVO\n");
+            return ERROR_ARCH;
         }
 
-        curl_easy_cleanup(curl);
+        fgets(linea,100,pf);
+        fclose(pf);
+
+        act = strchr(linea, '\n');
+        if (act)
+            *act = '\0';
+
+        act=strrchr(linea,'|');
+        strcpy(configuracion->codGrupo,act+1);
+        *act='\0';
+        strcpy(configuracion->urlAPi,linea);
+
+        return REALIZADO;
     }
 
-    curl_global_cleanup();
-}
+    int  enviarResultadoAPI(tApi* config, const char* nombre, int gano)
+    {
+        CURL* curl;
+        CURLcode res;
+        char json[256];
+
+        //JSON PARA LA API
+        sprintf(json,
+            "{\"codigoGrupo\":\"%s\",\"jugador\":{\"nombre\":\"%s\",\"vencedor\":%d}}",
+            config->codGrupo, nombre, gano
+        );
 
 
-*/
+        curl_global_init(CURL_GLOBAL_ALL);
+        curl = curl_easy_init();
+
+        if (curl) {
+
+            curl_easy_setopt(curl, CURLOPT_URL, config->urlAPi);
+            curl_easy_setopt(curl, CURLOPT_POSTFIELDS, json);
+
+
+            struct curl_slist* headers = NULL;
+            headers = curl_slist_append(headers, "Content-Type: application/json");
+            curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+
+
+            curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+
+            // SOLICITUD DE POST
+            res = curl_easy_perform(curl);
+
+            //VERIFICO ERROR
+            if (res != CURLE_OK) {
+                fprintf(stderr, "Error al enviar POST: %s\n", curl_easy_strerror(res));
+            }
+
+
+            curl_slist_free_all(headers);
+            curl_easy_cleanup(curl);
+        }
+
+        curl_global_cleanup();
+
+        return REALIZADO;
+    }
+
+    int obtenerRanking(tApi *config)
+    {
+        CURL *curl;
+        CURLcode res;
+        char urlCompleto[256];
+        sprintf(urlCompleto, "%s/%s",config->urlAPi,config->codGrupo);
+        printf("%s\n",urlCompleto);
+        curl_global_init(CURL_GLOBAL_DEFAULT);
+        curl = curl_easy_init();
+
+        if (curl) {
+            // CARGO EL URL DE GET
+            curl_easy_setopt(curl, CURLOPT_URL, urlCompleto);
+
+            curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+
+            //MUESTRA LA RESPUESTA
+            curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+
+            // SOLICITO GET
+            res = curl_easy_perform(curl);
+
+            if (res != CURLE_OK) {
+                fprintf(stderr, "Error en la solicitud: %s\n", curl_easy_strerror(res));
+            }
+            curl_easy_cleanup(curl);
+        }
+
+        curl_global_cleanup();
+
+        return REALIZADO;
+    }
+
+    size_t WriteCallback(void *contents, size_t size, size_t nmemb, void *userp)
+    {
+        size_t realsize = size * nmemb;
+        printf("%.*s", (int)realsize, (char *)contents);
+        return realsize;
+    }
+
+    void eliminarRanking(tApi* config)
+    {
+        CURL* curl;
+        CURLcode res;
+        char urlCompleto[256];
+        sprintf(urlCompleto, "%s/%s",config->urlAPi,config->codGrupo);
+        printf("%s\n",urlCompleto);
+
+        curl_global_init(CURL_GLOBAL_DEFAULT);
+        curl = curl_easy_init();
+
+        if (curl) {
+            curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "DELETE");
+            curl_easy_setopt(curl, CURLOPT_URL,urlCompleto);
+            curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+            res = curl_easy_perform(curl);
+
+            if (res != CURLE_OK) {
+                fprintf(stderr, "Error al hacer DELETE: %s\n", curl_easy_strerror(res));
+            } else {
+                printf("Ranking del grupo '%s' eliminado correctamente.\n", config->codGrupo);
+            }
+
+            curl_easy_cleanup(curl);
+        }
+
+        curl_global_cleanup();
+    }
+
+
+    */
