@@ -22,10 +22,14 @@ typedef struct
 }tApi;
 
 typedef struct {
-    unsigned char puntajeHumano;
-    unsigned char puntajeMaquina;
-    signed char ultimaCartaOponente;
+    signed char *puntajeActual;
+    signed char *puntajeOponente;
+    signed char *ultimaCartaOponente;
     tVectorCartas* cartas;
+    int *esHumano;
+    unsigned char* nroDeTurno;
+    const char* nombreActual;
+    const char* nombreOponente;
 } tEstadoJuego;
 
 typedef signed char (*tFuncionElegirCarta)(const tEstadoJuego*);
@@ -38,8 +42,11 @@ signed char modoDIFICIL(const tEstadoJuego* estadoDeJuego);
 
 const char* decodificarCarta(int valor);
 unsigned char jugar(const char *nombre, tFuncionElegirCarta dificultadMaq);
+
 /*
-int generarInforme(tCola *informe, int ganador, char *nombreJugador);
+int generarInforme(tCola *informe, unsigned char ganador, char *nombreJugador);
+
+
 int leerConfiguracion(tApi* configuracion);
 int  enviarResultadoAPI(tApi* config, const char* nombre, int gano);
 int obtenerRanking(tApi *config);
