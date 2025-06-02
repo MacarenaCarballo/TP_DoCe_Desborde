@@ -52,7 +52,7 @@ int main()
 
 
 
-            printf("\n\n EL GANADOR DEL JUEDO ES %s", finDelJuego==GANO_HUMANO? nombre: "MAQUINA");
+            printf("\n\n EL GANADOR DEL JUEGO ES %s", finDelJuego==GANO_HUMANO? nombre: "MAQUINA");
             printf("\n\nFin del juego.\n");
             system("pause");
             system("cls");

@@ -31,7 +31,6 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="../../listaDobleFilter_Desborde/listaDobleFilter/listaDobleFilter.cbp" />
 		<Unit filename="DoCe_funciones.c">
 			<Option compilerVar="CC" />
 		</Unit>

@@ -95,7 +95,7 @@ signed char modoDIFICIL( tEstadoJuego* estadoDeJuego)
 
             if((cartaMaq==MAS_UNO)||(cartaMaq==MAS_DOS))
                 cartasBuenas++;
-            //guardo posicion de la carta repetir turno
+
             if(cartaMaq==REPETIR_TURNO)
             {
                 hayRepetir=1;
@@ -123,7 +123,6 @@ int reponerCarta(tPila* mazoJuego, tVectorCartas* mazoDescarte, tVectorCartas* m
 {
     signed char nuevaCarta;
 
-    // Intentar sacar una carta del mazo
 
     if(desapilar(mazoJuego, &nuevaCarta, sizeof(nuevaCarta)) == REALIZADO)
         if(insVecAlFinal(mano, nuevaCarta)!=REALIZADO)
@@ -132,14 +131,11 @@ int reponerCarta(tPila* mazoJuego, tVectorCartas* mazoDescarte, tVectorCartas* m
 
     if (mano->cantElem < CANT_REPARTO)
     {
-        // Mezclar descarte y reponer el mazo
         mezclarVector(mazoDescarte);
 
         while (sacarUltVec(mazoDescarte, &nuevaCarta) == REALIZADO)
             apilar(mazoJuego, &nuevaCarta, sizeof(nuevaCarta));
 
-
-        // Intentar de nuevo
         if (desapilar(mazoJuego, &nuevaCarta, sizeof(nuevaCarta)) == VACIO)
         {
             puts("No se pudo recargar el mazo. Juego terminado.");
@@ -149,7 +145,6 @@ int reponerCarta(tPila* mazoJuego, tVectorCartas* mazoDescarte, tVectorCartas* m
         insVecAlFinal(mano, nuevaCarta);
     }
 
-    // Agregar la nueva carta a la mano del jugador
     return REALIZADO;
 }
 signed char aplicarEfecto(signed char efecto,tEstadoJuego *estado,tCola *informeJuego)
@@ -252,17 +247,14 @@ int ejecutarTurno(tVectorCartas *mazoDescarte,
     signed char carta;
     signed char estado;
 
-    // Elegir carta (según IA o humano)
     carta = elegirCarta(estadoJuego);
 
-    // Aplicar efecto de la carta, pasando solo la estructura, la carta y la cola
     estado = aplicarEfecto(carta, estadoJuego, informe);
 
-    // Guardar carta en mazo de descarte
     insVecAlFinal(mazoDescarte, carta);
 
     *(estadoJuego->ultimaCartaOponente) = carta;
-    // Robar una nueva carta
+
     if (reponerCarta(mazoJuego, mazoDescarte, estadoJuego->cartas) != REALIZADO)
         return VACIO;
 
@@ -287,15 +279,14 @@ void mostrarCartasEnLinea(const tVectorCartas *cartas)
     signed char carta;
     const char *nombre;
 
-    // Línea superior
+
     for (i = 0; i < cant; i++) printf("+---------+   ");
     printf("\n");
 
-    // Línea vacía
+
     for (i = 0; i < cant; i++) printf("|         |   ");
     printf("\n");
 
-    // Línea con valor numérico
     for (i = 0; i < cant; i++)
     {
         carta = (signed char)(cartas->datos[i]);
@@ -303,7 +294,6 @@ void mostrarCartasEnLinea(const tVectorCartas *cartas)
     }
     printf("\n");
 
-    // Línea con nombre de la carta
     for (i = 0; i < cant; i++)
     {
         carta = (signed char)(cartas->datos[i]);
@@ -337,11 +327,10 @@ void mostrarCartasEnLinea(const tVectorCartas *cartas)
     }
     printf("\n");
 
-    // Línea inferior
+
     for (i = 0; i < cant; i++) printf("+---------+   ");
     printf("\n");
 
-    // Índices debajo
     for (i = 0; i < cant; i++) printf("    [%d]     ", i + 1);
     printf("\n");
 }
@@ -365,14 +354,14 @@ int repartirCartas(tPila *mazo, tVectorCartas *jugHum, tVectorCartas *jugMaq)
 
     for (i = 0; i < CANT_REPARTO; i++)
     {
-        // Jugador humano
+
         if (desapilar(mazo, &carta, sizeof(signed char))!=REALIZADO)
             return VACIO;
 
         if (insVecAlFinal(jugHum, carta)!= REALIZADO)
             return SIN_MEM;
 
-        // Máquina
+
         if (desapilar(mazo, &carta, sizeof(signed char))!=REALIZADO)
             return VACIO;
 
@@ -393,7 +382,7 @@ signed char elegirCartaHumano(tEstadoJuego* estado)
     do
     {
         printf("Elegi una carta (1 a 3): ");
-        r = scanf("%hhu", &opcion);  // %hhu para unsigned char
+        r = scanf("%hhu", &opcion);
         while(getchar() != '\n');
 
         if (r != 1 || opcion < 1 || opcion > 3)
@@ -403,8 +392,6 @@ signed char elegirCartaHumano(tEstadoJuego* estado)
     while (r != 1 || opcion < 1 || opcion > 3);
 
 
-
-    // Eliminar carta de la posición (opcion - 1)
 
     if (elimPorPosVec(estado->cartas, opcion - 1, &carta) != REALIZADO)
     {
@@ -471,12 +458,11 @@ unsigned char jugar(const char *nombre, tFuncionElegirCarta dificultadMaq)
     unsigned char estado;
     tApi config;
 
-    int esHumano = rand() % 2;  // 0 = maquina  1 = humano
+    int esHumano = rand() % 2;
 
     tEstadoJuego estadoDeJuego;
     tFuncionElegirCarta elegirCarta;
 
-    // Inicializo segun quien va a empezar
     if (esHumano)
     {
         estadoDeJuego.puntajeActual = &puntajeHum;
@@ -501,8 +487,6 @@ unsigned char jugar(const char *nombre, tFuncionElegirCarta dificultadMaq)
     estadoDeJuego.esHumano = &esHumano;
     estadoDeJuego.nroDeTurno = &nroDeTurno;
 
-
-    // Inicializaciones de estructuras auxiliares
     crearPila(&mazoJuego);
     crearVector(&cartasHum);
     crearVector(&cartasMaq);
@@ -529,7 +513,7 @@ unsigned char jugar(const char *nombre, tFuncionElegirCarta dificultadMaq)
 
             printf("Turno de %s:\n", estadoDeJuego.nombreActual);
 
-            // Ejecutar el turno
+
             estado = ejecutarTurno(&mazoDescarte,
                                    &mazoJuego,
                                    &informeJuego,
@@ -554,7 +538,7 @@ unsigned char jugar(const char *nombre, tFuncionElegirCarta dificultadMaq)
 
         mostrarTablero(puntajeHum, puntajeMaq, &cartasHum);
 
-        // Invertir roles
+
         esHumano = !esHumano;
         if (esHumano)
         {
@@ -684,7 +668,6 @@ int  enviarResultadoAPI(tApi* config, const char* nombre, int gano)
     CURLcode res;
     char json[256];
 
-    //JSON PARA LA API
     sprintf(json,
             "{\"codigoGrupo\":\"%s\",\"jugador\":{\"nombre\":\"%s\",\"vencedor\":%d}}",
             config->codGrupo, nombre, gano
@@ -708,10 +691,10 @@ int  enviarResultadoAPI(tApi* config, const char* nombre, int gano)
 
         curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
 
-        // SOLICITUD DE POST
+
         res = curl_easy_perform(curl);
 
-        //VERIFICO ERROR
+
         if (res != CURLE_OK)
         {
             fprintf(stderr, "Error al enviar POST: %s\n", curl_easy_strerror(res));
@@ -739,16 +722,16 @@ int obtenerRanking(tApi *config)
 
     if (curl)
     {
-        // CARGO EL URL DE GET
+
         curl_easy_setopt(curl, CURLOPT_URL, urlCompleto);
 
         curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
 
-        //MUESTRA LA RESPUESTA
+
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, guardarRespuesta);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, bufferRanking);
 
-        // SOLICITO GET
+
         res = curl_easy_perform(curl);
 
         if (res != CURLE_OK)

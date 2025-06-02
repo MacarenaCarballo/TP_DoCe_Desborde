@@ -1,4 +1,4 @@
-# DOCUMENTACION SOBRE LAS ESTRATEGIAS UTILIZADAS EN DoCe
+# 🧚‍♀️DOCUMENTACION SOBRE LAS ESTRATEGIAS UTILIZADAS EN DoCe🧚‍♂️
 ## 🎯 Objetivo del Trabajo Practico.
  El trabajo práctico consiste en la implementación del juego **DoCe**, aplicando las estructuras de datos, algoritmos vistos en clase. Ademas se agregan conceptos nuevos como la integración de una API externa para consultar un ranking en línea y el uso de repositorios en GitHub para hacer codigo colaborativo.
 
