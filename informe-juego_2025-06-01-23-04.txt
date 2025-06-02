@@ -1,0 +1,642 @@
+===== INFORME DE PARTIDA =====
+
+Ganador: macarena
+
+Detalle de turnos:
+
+[Turno 1] macarena jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos macarena: 2
+  Puntos Maquina: 0
+
+[Turno 2] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 1
+  Puntos macarena: 2
+
+[Turno 3] macarena jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos macarena: 2
+  Puntos Maquina: 0
+
+[Turno 4] Maquina jugo carta SACAR_UNO. macarena pierde 1 punto.
+  Puntos Maquina: 0
+  Puntos macarena: 1
+
+[Turno 5] macarena jugo ESPEJO. Devuelve el efecto de -1 punto a Maquina!
+  Puntos macarena: 2
+  Puntos Maquina: 0
+
+[Turno 6] Maquina jugo carta SACAR_UNO. macarena pierde 1 punto.
+  Puntos Maquina: 0
+  Puntos macarena: 1
+
+[Turno 7] macarena jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos macarena: 1
+  Puntos Maquina: 0
+
+[Turno 8] macarena jugo carta MAS_UNO. Gana 1 punto!
+  Puntos macarena: 2
+  Puntos Maquina: 0
+
+[Turno 9] Maquina jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos Maquina: 2
+  Puntos macarena: 2
+
+[Turno 10] macarena jugo carta SACAR_DOS. Maquina pierde 2 puntos.
+  Puntos macarena: 2
+  Puntos Maquina: 0
+
+[Turno 11] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 1
+  Puntos macarena: 2
+
+[Turno 12] macarena jugo carta MAS_UNO. Gana 1 punto!
+  Puntos macarena: 3
+  Puntos Maquina: 1
+
+[Turno 13] Maquina jugo carta SACAR_UNO. macarena pierde 1 punto.
+  Puntos Maquina: 1
+  Puntos macarena: 2
+
+[Turno 14] macarena jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos macarena: 2
+  Puntos Maquina: 0
+
+[Turno 15] Maquina jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos Maquina: 2
+  Puntos macarena: 2
+
+[Turno 16] macarena jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos macarena: 2
+  Puntos Maquina: 1
+
+[Turno 17] Maquina jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos Maquina: 1
+  Puntos macarena: 2
+
+[Turno 18] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 2
+  Puntos macarena: 2
+
+[Turno 19] macarena jugo carta SACAR_DOS. Maquina pierde 2 puntos.
+  Puntos macarena: 2
+  Puntos Maquina: 0
+
+[Turno 20] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 1
+  Puntos macarena: 2
+
+[Turno 21] macarena jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos macarena: 4
+  Puntos Maquina: 1
+
+[Turno 22] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 2
+  Puntos macarena: 4
+
+[Turno 23] macarena jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos macarena: 4
+  Puntos Maquina: 2
+
+[Turno 24] macarena jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos macarena: 6
+  Puntos Maquina: 2
+
+[Turno 25] Maquina jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos Maquina: 2
+  Puntos macarena: 6
+
+[Turno 26] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 3
+  Puntos macarena: 6
+
+[Turno 27] macarena jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos macarena: 6
+  Puntos Maquina: 3
+
+[Turno 28] macarena jugo carta MAS_UNO. Gana 1 punto!
+  Puntos macarena: 7
+  Puntos Maquina: 3
+
+[Turno 29] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 4
+  Puntos macarena: 7
+
+[Turno 30] macarena jugo carta SACAR_DOS. Maquina pierde 2 puntos.
+  Puntos macarena: 7
+  Puntos Maquina: 2
+
+[Turno 31] Maquina jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos Maquina: 2
+  Puntos macarena: 7
+
+[Turno 32] Maquina jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos Maquina: 4
+  Puntos macarena: 7
+
+[Turno 33] macarena jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos macarena: 7
+  Puntos Maquina: 3
+
+[Turno 34] Maquina jugo carta SACAR_DOS. macarena pierde 2 puntos.
+  Puntos Maquina: 3
+  Puntos macarena: 5
+
+[Turno 35] macarena jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos macarena: 5
+  Puntos Maquina: 2
+
+[Turno 36] Maquina jugo carta SACAR_DOS. macarena pierde 2 puntos.
+  Puntos Maquina: 2
+  Puntos macarena: 3
+
+[Turno 37] macarena jugo carta SACAR_DOS. Maquina pierde 2 puntos.
+  Puntos macarena: 3
+  Puntos Maquina: 0
+
+[Turno 38] Maquina jugo ESPEJO. Devuelve el efecto de -2 puntos a macarena!
+  Puntos Maquina: 2
+  Puntos macarena: 1
+
+[Turno 39] macarena jugo ESPEJO. Devuelve el efecto de -2 puntos a Maquina!
+  Puntos macarena: 3
+  Puntos Maquina: 0
+
+[Turno 40] Maquina jugo ESPEJO, pero no habia efecto para devolver.
+  Puntos Maquina: 0
+  Puntos macarena: 3
+
+[Turno 41] macarena jugo carta MAS_UNO. Gana 1 punto!
+  Puntos macarena: 4
+  Puntos Maquina: 0
+
+[Turno 42] Maquina jugo carta SACAR_UNO. macarena pierde 1 punto.
+  Puntos Maquina: 0
+  Puntos macarena: 3
+
+[Turno 43] macarena jugo ESPEJO. Devuelve el efecto de -1 punto a Maquina!
+  Puntos macarena: 4
+  Puntos Maquina: 0
+
+[Turno 44] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 1
+  Puntos macarena: 4
+
+[Turno 45] macarena jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos macarena: 4
+  Puntos Maquina: 0
+
+[Turno 46] Maquina jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos Maquina: 2
+  Puntos macarena: 4
+
+[Turno 47] macarena jugo carta MAS_UNO. Gana 1 punto!
+  Puntos macarena: 5
+  Puntos Maquina: 2
+
+[Turno 48] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 3
+  Puntos macarena: 5
+
+[Turno 49] macarena jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos macarena: 7
+  Puntos Maquina: 3
+
+[Turno 50] Maquina jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos Maquina: 3
+  Puntos macarena: 7
+
+[Turno 51] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 4
+  Puntos macarena: 7
+
+[Turno 52] macarena jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos macarena: 7
+  Puntos Maquina: 4
+
+[Turno 53] macarena jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos macarena: 9
+  Puntos Maquina: 4
+
+[Turno 54] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 5
+  Puntos macarena: 9
+
+[Turno 55] macarena jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos macarena: 9
+  Puntos Maquina: 5
+
+[Turno 56] macarena jugo carta MAS_UNO. Gana 1 punto!
+  Puntos macarena: 10
+  Puntos Maquina: 5
+
+[Turno 57] Maquina jugo carta SACAR_UNO. macarena pierde 1 punto.
+  Puntos Maquina: 5
+  Puntos macarena: 9
+
+[Turno 58] macarena jugo carta SACAR_DOS. Maquina pierde 2 puntos.
+  Puntos macarena: 9
+  Puntos Maquina: 3
+
+[Turno 59] Maquina jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos Maquina: 3
+  Puntos macarena: 9
+
+[Turno 60] Maquina jugo carta SACAR_DOS. macarena pierde 2 puntos.
+  Puntos Maquina: 3
+  Puntos macarena: 7
+
+[Turno 61] macarena jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos macarena: 7
+  Puntos Maquina: 2
+
+[Turno 62] Maquina jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos Maquina: 2
+  Puntos macarena: 7
+
+[Turno 63] Maquina jugo carta SACAR_UNO. macarena pierde 1 punto.
+  Puntos Maquina: 2
+  Puntos macarena: 6
+
+[Turno 64] macarena jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos macarena: 6
+  Puntos Maquina: 1
+
+[Turno 65] Maquina jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos Maquina: 3
+  Puntos macarena: 6
+
+[Turno 66] macarena jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos macarena: 6
+  Puntos Maquina: 2
+
+[Turno 67] Maquina jugo carta SACAR_UNO. macarena pierde 1 punto.
+  Puntos Maquina: 2
+  Puntos macarena: 5
+
+[Turno 68] macarena jugo carta SACAR_DOS. Maquina pierde 2 puntos.
+  Puntos macarena: 5
+  Puntos Maquina: 0
+
+[Turno 69] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 1
+  Puntos macarena: 5
+
+[Turno 70] macarena jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos macarena: 7
+  Puntos Maquina: 1
+
+[Turno 71] Maquina jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos Maquina: 3
+  Puntos macarena: 7
+
+[Turno 72] macarena jugo carta MAS_UNO. Gana 1 punto!
+  Puntos macarena: 8
+  Puntos Maquina: 3
+
+[Turno 73] Maquina jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos Maquina: 3
+  Puntos macarena: 8
+
+[Turno 74] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 4
+  Puntos macarena: 8
+
+[Turno 75] macarena jugo carta MAS_UNO. Gana 1 punto!
+  Puntos macarena: 9
+  Puntos Maquina: 4
+
+[Turno 76] Maquina jugo carta SACAR_DOS. macarena pierde 2 puntos.
+  Puntos Maquina: 4
+  Puntos macarena: 7
+
+[Turno 77] macarena jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos macarena: 9
+  Puntos Maquina: 4
+
+[Turno 78] Maquina jugo carta SACAR_DOS. macarena pierde 2 puntos.
+  Puntos Maquina: 4
+  Puntos macarena: 7
+
+[Turno 79] macarena jugo carta MAS_UNO. Gana 1 punto!
+  Puntos macarena: 8
+  Puntos Maquina: 4
+
+[Turno 80] Maquina jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos Maquina: 4
+  Puntos macarena: 8
+
+[Turno 81] Maquina jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos Maquina: 4
+  Puntos macarena: 8
+
+[Turno 82] Maquina jugo ESPEJO, pero no habia efecto para devolver.
+  Puntos Maquina: 4
+  Puntos macarena: 8
+
+[Turno 83] macarena jugo carta MAS_UNO. Gana 1 punto!
+  Puntos macarena: 9
+  Puntos Maquina: 4
+
+[Turno 84] Maquina jugo carta SACAR_DOS. macarena pierde 2 puntos.
+  Puntos Maquina: 4
+  Puntos macarena: 7
+
+[Turno 85] macarena jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos macarena: 7
+  Puntos Maquina: 3
+
+[Turno 86] Maquina jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos Maquina: 5
+  Puntos macarena: 7
+
+[Turno 87] macarena jugo carta SACAR_DOS. Maquina pierde 2 puntos.
+  Puntos macarena: 7
+  Puntos Maquina: 3
+
+[Turno 88] Maquina jugo ESPEJO. Devuelve el efecto de -2 puntos a macarena!
+  Puntos Maquina: 5
+  Puntos macarena: 5
+
+[Turno 89] macarena jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos macarena: 5
+  Puntos Maquina: 4
+
+[Turno 90] Maquina jugo carta SACAR_DOS. macarena pierde 2 puntos.
+  Puntos Maquina: 4
+  Puntos macarena: 3
+
+[Turno 91] macarena jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos macarena: 3
+  Puntos Maquina: 3
+
+[Turno 92] Maquina jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos Maquina: 3
+  Puntos macarena: 3
+
+[Turno 93] Maquina jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos Maquina: 3
+  Puntos macarena: 3
+
+[Turno 94] Maquina jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos Maquina: 5
+  Puntos macarena: 3
+
+[Turno 95] macarena jugo carta MAS_UNO. Gana 1 punto!
+  Puntos macarena: 4
+  Puntos Maquina: 5
+
+[Turno 96] Maquina jugo ESPEJO, pero no habia efecto para devolver.
+  Puntos Maquina: 5
+  Puntos macarena: 4
+
+[Turno 97] macarena jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos macarena: 6
+  Puntos Maquina: 5
+
+[Turno 98] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 6
+  Puntos macarena: 6
+
+[Turno 99] macarena jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos macarena: 6
+  Puntos Maquina: 5
+
+[Turno 100] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 6
+  Puntos macarena: 6
+
+[Turno 101] macarena jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos macarena: 6
+  Puntos Maquina: 5
+
+[Turno 102] Maquina jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos Maquina: 5
+  Puntos macarena: 6
+
+[Turno 103] Maquina jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos Maquina: 7
+  Puntos macarena: 6
+
+[Turno 104] macarena jugo carta SACAR_DOS. Maquina pierde 2 puntos.
+  Puntos macarena: 6
+  Puntos Maquina: 5
+
+[Turno 105] Maquina jugo carta SACAR_UNO. macarena pierde 1 punto.
+  Puntos Maquina: 5
+  Puntos macarena: 5
+
+[Turno 106] macarena jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos macarena: 5
+  Puntos Maquina: 4
+
+[Turno 107] Maquina jugo carta SACAR_UNO. macarena pierde 1 punto.
+  Puntos Maquina: 4
+  Puntos macarena: 4
+
+[Turno 108] macarena jugo carta MAS_UNO. Gana 1 punto!
+  Puntos macarena: 5
+  Puntos Maquina: 4
+
+[Turno 109] Maquina jugo carta SACAR_DOS. macarena pierde 2 puntos.
+  Puntos Maquina: 4
+  Puntos macarena: 3
+
+[Turno 110] macarena jugo ESPEJO. Devuelve el efecto de -2 puntos a Maquina!
+  Puntos macarena: 5
+  Puntos Maquina: 2
+
+[Turno 111] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 3
+  Puntos macarena: 5
+
+[Turno 112] macarena jugo carta SACAR_DOS. Maquina pierde 2 puntos.
+  Puntos macarena: 5
+  Puntos Maquina: 1
+
+[Turno 113] Maquina jugo carta SACAR_DOS. macarena pierde 2 puntos.
+  Puntos Maquina: 1
+  Puntos macarena: 3
+
+[Turno 114] macarena jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos macarena: 3
+  Puntos Maquina: 0
+
+[Turno 115] Maquina jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos Maquina: 2
+  Puntos macarena: 3
+
+[Turno 116] macarena jugo carta MAS_UNO. Gana 1 punto!
+  Puntos macarena: 4
+  Puntos Maquina: 2
+
+[Turno 117] Maquina jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos Maquina: 4
+  Puntos macarena: 4
+
+[Turno 118] macarena jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos macarena: 4
+  Puntos Maquina: 4
+
+[Turno 119] macarena jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos macarena: 4
+  Puntos Maquina: 4
+
+[Turno 120] macarena jugo carta SACAR_DOS. Maquina pierde 2 puntos.
+  Puntos macarena: 4
+  Puntos Maquina: 2
+
+[Turno 121] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 3
+  Puntos macarena: 4
+
+[Turno 122] macarena jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos macarena: 6
+  Puntos Maquina: 3
+
+[Turno 123] Maquina jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos Maquina: 5
+  Puntos macarena: 6
+
+[Turno 124] macarena jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos macarena: 6
+  Puntos Maquina: 5
+
+[Turno 125] macarena jugo carta MAS_UNO. Gana 1 punto!
+  Puntos macarena: 7
+  Puntos Maquina: 5
+
+[Turno 126] Maquina jugo carta SACAR_UNO. macarena pierde 1 punto.
+  Puntos Maquina: 5
+  Puntos macarena: 6
+
+[Turno 127] macarena jugo ESPEJO. Devuelve el efecto de -1 punto a Maquina!
+  Puntos macarena: 7
+  Puntos Maquina: 4
+
+[Turno 128] Maquina jugo carta SACAR_UNO. macarena pierde 1 punto.
+  Puntos Maquina: 4
+  Puntos macarena: 6
+
+[Turno 129] macarena jugo carta MAS_UNO. Gana 1 punto!
+  Puntos macarena: 7
+  Puntos Maquina: 4
+
+[Turno 130] Maquina jugo carta SACAR_DOS. macarena pierde 2 puntos.
+  Puntos Maquina: 4
+  Puntos macarena: 5
+
+[Turno 131] macarena jugo carta SACAR_DOS. Maquina pierde 2 puntos.
+  Puntos macarena: 5
+  Puntos Maquina: 2
+
+[Turno 132] Maquina jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos Maquina: 4
+  Puntos macarena: 5
+
+[Turno 133] macarena jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos macarena: 5
+  Puntos Maquina: 4
+
+[Turno 134] macarena jugo carta MAS_UNO. Gana 1 punto!
+  Puntos macarena: 6
+  Puntos Maquina: 4
+
+[Turno 135] Maquina jugo carta SACAR_UNO. macarena pierde 1 punto.
+  Puntos Maquina: 4
+  Puntos macarena: 5
+
+[Turno 136] macarena jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos macarena: 7
+  Puntos Maquina: 4
+
+[Turno 137] Maquina jugo carta SACAR_UNO. macarena pierde 1 punto.
+  Puntos Maquina: 4
+  Puntos macarena: 6
+
+[Turno 138] macarena jugo carta MAS_UNO. Gana 1 punto!
+  Puntos macarena: 7
+  Puntos Maquina: 4
+
+[Turno 139] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 5
+  Puntos macarena: 7
+
+[Turno 140] macarena jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos macarena: 7
+  Puntos Maquina: 5
+
+[Turno 141] macarena jugo carta MAS_UNO. Gana 1 punto!
+  Puntos macarena: 8
+  Puntos Maquina: 5
+
+[Turno 142] Maquina jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos Maquina: 5
+  Puntos macarena: 8
+
+[Turno 143] Maquina jugo ESPEJO, pero no habia efecto para devolver.
+  Puntos Maquina: 5
+  Puntos macarena: 8
+
+[Turno 144] macarena jugo carta MAS_UNO. Gana 1 punto!
+  Puntos macarena: 9
+  Puntos Maquina: 5
+
+[Turno 145] Maquina jugo carta SACAR_UNO. macarena pierde 1 punto.
+  Puntos Maquina: 5
+  Puntos macarena: 8
+
+[Turno 146] macarena jugo carta SACAR_DOS. Maquina pierde 2 puntos.
+  Puntos macarena: 8
+  Puntos Maquina: 3
+
+[Turno 147] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 4
+  Puntos macarena: 8
+
+[Turno 148] macarena jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos macarena: 8
+  Puntos Maquina: 4
+
+[Turno 149] macarena jugo carta SACAR_DOS. Maquina pierde 2 puntos.
+  Puntos macarena: 8
+  Puntos Maquina: 2
+
+[Turno 150] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 3
+  Puntos macarena: 8
+
+[Turno 151] macarena jugo carta SACAR_UNO. Maquina pierde 1 punto.
+  Puntos macarena: 8
+  Puntos Maquina: 2
+
+[Turno 152] Maquina jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos Maquina: 2
+  Puntos macarena: 8
+
+[Turno 153] Maquina jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos Maquina: 4
+  Puntos macarena: 8
+
+[Turno 154] macarena jugo carta MAS_UNO. Gana 1 punto!
+  Puntos macarena: 9
+  Puntos Maquina: 4
+
+[Turno 155] Maquina jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos Maquina: 6
+  Puntos macarena: 9
+
+[Turno 156] macarena jugo carta REPETIR_TURNO. Juega otra vez!
+  Puntos macarena: 9
+  Puntos Maquina: 6
+
+[Turno 157] macarena jugo carta MAS_UNO. Gana 1 punto!
+  Puntos macarena: 10
+  Puntos Maquina: 6
+
+[Turno 158] Maquina jugo carta MAS_UNO. Gana 1 punto!
+  Puntos Maquina: 7
+  Puntos macarena: 10
+
+[Turno 159] macarena jugo carta MAS_DOS. Gana 2 puntos!
+  Puntos macarena: 12
+  Puntos Maquina: 7
+
