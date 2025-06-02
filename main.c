@@ -20,6 +20,8 @@ int main()
         opcion = toupper(opcion);
         fflush(stdin);
 
+        srand(time(NULL));
+
         switch(opcion)
         {
 

@@ -7,7 +7,6 @@ signed char modoFACIL(tEstadoJuego* estadoDeJuego)
     if (!estadoDeJuego || estadoDeJuego->cartas->cantElem == 0)
         return VACIO;
 
-    srand(time(NULL));
 
     unsigned pos = rand() % estadoDeJuego->cartas->cantElem;
 
@@ -109,7 +108,7 @@ signed char modoDIFICIL( tEstadoJuego* estadoDeJuego)
     {
         if(verCartaPorPos(estadoDeJuego->cartas,posRepetir,&cartaMaq)==REALIZADO)
         {
-            if (elimPorPosVec(estadoDeJuego->cartas, i, &cartaMaq) != REALIZADO)
+            if (elimPorPosVec(estadoDeJuego->cartas, posRepetir, &cartaMaq) != REALIZADO)
                 return VACIO;
 
             return cartaMaq;
@@ -472,21 +471,36 @@ unsigned char jugar(const char *nombre, tFuncionElegirCarta dificultadMaq)
     unsigned char estado;
     tApi config;
 
-    int esHumano = 1;
+    int esHumano = rand() % 2;  // 0 = maquina  1 = humano
 
     tEstadoJuego estadoDeJuego;
+    tFuncionElegirCarta elegirCarta;
 
-    // Inicialización de estructura
-    estadoDeJuego.puntajeActual = &puntajeHum;
-    estadoDeJuego.puntajeOponente = &puntajeMaq;
-    estadoDeJuego.ultimaCartaOponente = &efectoPendMaq;
-    estadoDeJuego.cartas = &cartasHum;
+    // Inicializo segun quien va a empezar
+    if (esHumano)
+    {
+        estadoDeJuego.puntajeActual = &puntajeHum;
+        estadoDeJuego.puntajeOponente = &puntajeMaq;
+        estadoDeJuego.ultimaCartaOponente = &efectoPendMaq;
+        estadoDeJuego.cartas = &cartasHum;
+        estadoDeJuego.nombreActual = nombre;
+        estadoDeJuego.nombreOponente = "Maquina";
+        elegirCarta = elegirCartaHumano;
+    }
+    else
+    {
+        estadoDeJuego.puntajeActual = &puntajeMaq;
+        estadoDeJuego.puntajeOponente = &puntajeHum;
+        estadoDeJuego.ultimaCartaOponente = &efectoPendHum;
+        estadoDeJuego.cartas = &cartasMaq;
+        estadoDeJuego.nombreActual = "Maquina";
+        estadoDeJuego.nombreOponente = nombre;
+        elegirCarta = dificultadMaq;
+    }
+
     estadoDeJuego.esHumano = &esHumano;
     estadoDeJuego.nroDeTurno = &nroDeTurno;
-    estadoDeJuego.nombreActual = nombre;
-    estadoDeJuego.nombreOponente = "Maquina";
 
-    tFuncionElegirCarta elegirCarta = elegirCartaHumano;
 
     // Inicializaciones de estructuras auxiliares
     crearPila(&mazoJuego);
@@ -502,6 +516,9 @@ unsigned char jugar(const char *nombre, tFuncionElegirCarta dificultadMaq)
     }
 
     repartirCartas(&mazoJuego, &cartasHum, &cartasMaq);
+
+    printf("Empieza: %s\n\n", estadoDeJuego.nombreActual);
+    system("pause");
 
     while (puntajeHum < 12 && puntajeMaq < 12)
     {
