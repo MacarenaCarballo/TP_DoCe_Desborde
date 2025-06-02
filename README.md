@@ -2,7 +2,7 @@
 
 **DoCe** es un juego de cartas por turnos entre un jugador humano y una computadora. El objetivo del juego es llegar a los **12** puntos antes que el oponente.
 
-## 🎮**¿Cómo jugar?**
+## 🎮 **¿Cómo jugar?**
 
 - Ejecutar el programa.
 - Se mostrará el **MENU** con las diferentes opciones del juego:
@@ -40,7 +40,7 @@ Finaliza el programa.
 	- `ESPEJO` : anula el efecto negativo recibido y lo devuelve al oponente.
 
 ---
-## ⚙️**Configuración del juego**
+## ⚙️ **Configuración del juego**
 
 El juego cuenta con tres niveles de dificultad:
 
